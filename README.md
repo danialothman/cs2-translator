@@ -2,6 +2,8 @@
 
 Real-time voice translation overlay for CS2 (Counter-Strike 2) that translates Mandarin Chinese teammates to English using local AI processing.
 
+source chat: https://claude.ai/chat/a40f87dd-8cd2-42b9-90c2-66a6efe18652
+
 ## Features
 
 - 🎮 **Non-intrusive overlay** - Transparent window that sits on top of CS2
