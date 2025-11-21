@@ -30,7 +30,29 @@ source chat: https://claude.ai/chat/a40f87dd-8cd2-42b9-90c2-66a6efe18652
 
 ### 2. Configure Audio Routing
 
-After restart:
+You have two options for routing audio:
+
+#### Option A: Route Only CS2 (Recommended)
+
+This keeps your normal audio working for everything else:
+
+1. Keep your normal headphones/speakers as the default playback device
+2. Right-click speaker icon → **Open Sound settings**
+3. Scroll down → **Advanced sound options** → **App volume and device preferences**
+4. Find CS2 in the list → Change its **Output** to **CABLE Input**
+5. **Recording tab** (for monitoring):
+   - Right-click the speaker icon → **Sounds** → **Recording tab**
+   - Right-click "CABLE Output" → Properties
+   - Go to "Listen" tab
+   - Check "Listen to this device"
+   - Select your actual headphones/speakers in the dropdown
+   - Click Apply
+
+Now only CS2 audio routes through the virtual cable for translation!
+
+#### Option B: Route All System Audio
+
+If Option A doesn't work, route everything:
 
 1. Right-click the speaker icon in Windows taskbar → **Sounds**
 2. **Playback tab**:
@@ -42,7 +64,7 @@ After restart:
    - Select your actual headphones/speakers in the dropdown
    - Click Apply
 
-Now game audio routes through the virtual cable, and you can still hear it!
+**Important**: With this option, you'll need to switch back to your normal speakers when done (see "After Usage" section below).
 
 ### 3. Install Python Dependencies
 
@@ -104,6 +126,21 @@ The overlay window will appear. Try speaking some Mandarin to test it!
 
 - Close the overlay window, or
 - Press `Ctrl+C` in the terminal
+
+### After Usage
+
+**Important**: If you used **Option B** (routing all system audio), you need to switch your audio back:
+
+1. Right-click speaker icon → **Sounds**
+2. **Playback tab** → Right-click your normal speakers/headphones (e.g., "Speakers (Realtek Audio)")
+3. Click **"Set as Default Device"**
+
+**Why this matters**: If you leave CABLE Input as default, ALL your system audio (YouTube, Discord, music, etc.) will route through the virtual cable, and the translator will try to translate everything. This can cause:
+- Unnecessary GPU usage
+- Confusing translations of non-Mandarin audio
+- Your other apps' audio being processed by the translator
+
+**If you used Option A** (CS2 only routing), you don't need to change anything - your audio will work normally!
 
 ## Configuration
 

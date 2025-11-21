@@ -13,7 +13,7 @@ Configuration file
 # - small:  ~2GB VRAM, ~2s latency, good accuracy
 # - medium: ~5GB VRAM, ~2-3s latency, very good accuracy (RECOMMENDED)
 # - large:  ~10GB VRAM, ~4-5s latency, excellent accuracy
-MODEL_SIZE = "medium"
+MODEL_SIZE = "base"
 
 # Audio Processing Configuration
 # Duration of audio buffer before processing (in seconds)
