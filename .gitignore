@@ -173,8 +173,11 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# App settings (contains API key)
+# App settings
 settings.json
+
+# PyInstaller build output
+*.spec
 
 # Cursor  
 #  Cursor is an AI-powered code editor.`.cursorignore` specifies files/directories to 
