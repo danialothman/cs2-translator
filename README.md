@@ -8,9 +8,9 @@ Real-time voice translation overlay for CS2 (Counter-Strike 2) that translates f
 - **Cloud-powered** — uses OpenAI Whisper API, no GPU required
 - **VAC-safe** — no game process injection, just a display overlay
 - **Real-time** — 2-3 second latency for translations
-- **Multi-language** — supports Chinese, Japanese, Korean, Russian, Spanish, French, German, and more
+- **Multi-language** — Whisper detects the spoken language automatically (Chinese, Japanese, Korean, Russian, Spanish, French, German, and more)
 - **Smart filtering** — optionally skips English audio to save API costs
-- **Desktop app with GUI** — settings window with audio device picker, language selector, and live log panel
+- **Desktop app with GUI** — settings window with audio device picker and live log panel
 - **Secure** — API key stored in Windows Credential Manager, not in files
 - **WASAPI loopback** — capture speaker/headphone output directly, no virtual cable needed
 
@@ -46,10 +46,11 @@ The settings window opens where you can:
 
 1. **Enter your OpenAI API key** (stored securely in Windows Credential Manager)
 2. **Select an audio device** — pick your speakers/headphones as a loopback device to capture game audio, or a microphone for direct input
-3. **Choose source language** — Chinese, Japanese, Korean, Russian, etc. or auto-detect
-4. **Adjust buffer duration** — shorter = faster but less context, longer = more accurate
-5. **Toggle "Skip English"** — prevents translating English-to-English
-6. Click **Start Translating**
+3. **Adjust buffer duration** — shorter = faster but less context, longer = more accurate
+4. **Toggle "Skip English"** — prevents translating English-to-English
+5. Click **Start Translating**
+
+You do not need to pick a source language. Whisper detects it for each audio chunk.
 
 The overlay appears on top of your game showing timestamped translations. Drag it to reposition.
 
@@ -60,16 +61,15 @@ The app uses the OpenAI Whisper API which costs **$0.006 per minute** of audio.
 | Mode | Cost | Notes |
 |------|------|-------|
 | Skip English OFF | ~$0.006/min | Single API call per chunk, translates everything |
-| Skip English ON | ~$0.012/min for foreign speech | Two calls (detect language + translate), but free for English chunks |
+| Skip English ON | ~$0.012/min for foreign speech | Two calls (detect language + translate); English chunks cost one call |
 
 A typical CS2 session costs well under $1.
 
 ## Configuration
 
-All settings are configured through the GUI and persisted in `settings.json`. Available options:
+All settings are configured through the GUI and persisted in `%APPDATA%\CS2Translator\settings.json`. The API key is never written to this file. Available options:
 
 - **Audio device** — any input device or speaker loopback
-- **Source language** — language to translate from (or auto-detect)
 - **Buffer duration** — 2-6 seconds of audio per chunk
 - **Skip English** — avoid translating English speech
 
@@ -95,6 +95,10 @@ All settings are configured through the GUI and persisted in `settings.json`. Av
 - This is a known Whisper issue with silence/noise — common hallucinations are filtered automatically
 - If it persists, try increasing the buffer duration
 
+## Privacy
+
+The app sends captured audio, including your teammates' voices, to OpenAI for translation. It sends nothing while translation is stopped. OpenAI's API data usage policy governs how it handles that audio.
+
 ## Is This Bannable?
 
 **No.** This tool:
@@ -115,7 +119,8 @@ cs2-translator/
 ├── audio_capture.py    # Audio device enumeration and capture
 ├── config_manager.py   # Settings persistence (JSON + keyring)
 ├── requirements.txt    # Python dependencies
-└── settings.json       # User settings (gitignored)
+├── build.py            # PyInstaller build script
+└── .github/workflows/  # Windows .exe build and release on version tags
 ```
 
 ## Credits
