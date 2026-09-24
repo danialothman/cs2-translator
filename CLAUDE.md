@@ -41,6 +41,11 @@ Data flow: audio device → `AudioCaptureThread` → bounded `queue.Queue` → `
 - Keep the app free of game-process access (no injection, no memory reads). That is the basis of the README's anti-cheat claim.
 - Never log or persist the API key.
 
+## Planning Docs
+
+- **NEXT.md** — pending work and roadmap. Remove an item when it ships; add new work there.
+- **DECISION.md** — append-only decision log. Add a new `D-NNN` entry at the bottom for any design choice or trade-off. Never edit or delete earlier entries; to reverse one, add an entry that supersedes it.
+
 ## No Test Suite or Linter
 
 There are no automated tests or lint configuration. Audio capture and the GUI need Windows to run end to end.
