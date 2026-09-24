@@ -7,7 +7,7 @@ Real-time voice translation overlay for CS2 (Counter-Strike 2) that translates f
 - **Non-intrusive overlay** — transparent, draggable window that sits on top of CS2
 - **Cloud-powered** — uses OpenAI Whisper API, no GPU required
 - **VAC-safe** — no game process injection, just a display overlay
-- **Real-time** — 2-3 second latency for translations
+- **Near real-time** — captions arrive after the buffer duration (3 s by default) plus the API round trip
 - **Multi-language** — Whisper detects the spoken language automatically (Chinese, Japanese, Korean, Russian, Spanish, French, German, and more)
 - **Smart filtering** — optionally skips English audio to save API costs
 - **Desktop app with GUI** — settings window with audio device picker and live log panel
@@ -90,6 +90,10 @@ All settings are configured through the GUI and persisted in `%APPDATA%\CS2Trans
 ### Translations are slow
 - Reduce buffer duration (2-3 seconds)
 - Check your internet connection
+- If the log shows "Translation is falling behind; dropped a stale audio chunk", the API is slower than the audio. The app drops old audio to keep captions current. Turn off "Skip English" to halve the API calls per chunk.
+
+### "Rate limited by OpenAI" error
+- The message after the colon comes from OpenAI. If it mentions quota, add credits to your OpenAI account.
 
 ### Hallucinated translations (e.g. "Thank you for watching")
 - This is a known Whisper issue with silence/noise — common hallucinations are filtered automatically
