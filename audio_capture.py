@@ -9,9 +9,12 @@ audio from output devices (speakers/headphones), not just microphones.
 import io
 import wave
 import queue
+import logging
 import threading
 import numpy as np
 import pyaudiowpatch as pyaudio
+
+logger = logging.getLogger(__name__)
 
 
 SAMPLE_RATE = 16000
@@ -55,8 +58,8 @@ def list_audio_devices() -> list[dict]:
     return devices
 
 
-def build_wav(frames: list[bytes]) -> io.BytesIO:
-    """Wrap raw PCM frames into a WAV file in memory."""
+def build_wav(frames: list[bytes]) -> bytes:
+    """Wrap raw PCM frames into an in-memory WAV file and return its bytes."""
     buf = io.BytesIO()
     with wave.open(buf, "wb") as wf:
         wf.setnchannels(CHANNELS)
@@ -64,9 +67,24 @@ def build_wav(frames: list[bytes]) -> io.BytesIO:
         wf.setframerate(SAMPLE_RATE)
         for frame in frames:
             wf.writeframes(frame)
-    buf.seek(0)
-    buf.name = "audio.wav"
-    return buf
+    return buf.getvalue()
+
+
+def _put_latest(q: queue.Queue, item) -> None:
+    """Put item on a bounded queue, discarding the oldest item if it is full.
+
+    Live captions are only useful while they are current. When translation
+    falls behind capture, old audio is dropped so latency cannot grow.
+    """
+    try:
+        q.put_nowait(item)
+    except queue.Full:
+        try:
+            q.get_nowait()
+        except queue.Empty:
+            pass
+        logger.warning("Translation is falling behind; dropped a stale audio chunk")
+        q.put_nowait(item)
 
 
 def _resample_mono(data: bytes, src_channels: int, src_rate: int) -> bytes:
@@ -87,7 +105,7 @@ def _resample_mono(data: bytes, src_channels: int, src_rate: int) -> bytes:
 
 
 class AudioCaptureThread(threading.Thread):
-    """Daemon thread that captures audio and produces WAV BytesIO buffers."""
+    """Daemon thread that captures audio and produces WAV byte chunks."""
 
     def __init__(
         self,
@@ -143,8 +161,7 @@ class AudioCaptureThread(threading.Thread):
                     frames.append(data)
 
                     if len(frames) >= chunks_needed:
-                        wav_buf = build_wav(frames)
-                        self.output_queue.put(wav_buf)
+                        _put_latest(self.output_queue, build_wav(frames))
                         frames = []
                 except OSError as e:
                     self.on_error(f"Audio read error: {e}")
