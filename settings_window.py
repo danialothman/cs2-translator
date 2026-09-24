@@ -15,6 +15,10 @@ from audio_capture import list_audio_devices, AudioCaptureThread
 from translator import TranslatorThread
 from overlay import TranslationOverlay
 
+# Audio chunks waiting for translation. Kept small so captions stay current:
+# when the API falls behind, the capture thread drops the oldest chunk.
+AUDIO_QUEUE_SIZE = 2
+
 
 class _TkLogHandler(logging.Handler):
     """Logging handler that forwards records to a callback."""
@@ -42,7 +46,6 @@ class SettingsWindow:
         self.overlay = None
         self.capture_thread = None
         self.translator_thread = None
-        self.audio_queue = queue.Queue()
         self.stop_event = threading.Event()
         self.is_running = False
 
@@ -81,32 +84,6 @@ class SettingsWindow:
         ttk.Button(device_frame, text="Refresh", command=self._refresh_devices, width=8).pack(
             side="right", padx=(6, 0),
         )
-
-        # ─ Source language ─
-        ttk.Label(self.root, text="Source Language").pack(anchor="w", **pad)
-        self.lang_var = tk.StringVar(value=self.settings.get("source_language", "zh"))
-        lang_frame = ttk.Frame(self.root)
-        lang_frame.pack(fill="x", padx=12)
-        languages = [
-            ("Chinese (Mandarin)", "zh"),
-            ("Japanese", "ja"),
-            ("Korean", "ko"),
-            ("Russian", "ru"),
-            ("Portuguese", "pt"),
-            ("Spanish", "es"),
-            ("French", "fr"),
-            ("German", "de"),
-            ("Auto-detect", "auto"),
-        ]
-        self.lang_display = {name: code for name, code in languages}
-        self.lang_reverse = {code: name for name, code in languages}
-        lang_names = [name for name, _ in languages]
-        self.lang_combo = ttk.Combobox(
-            lang_frame, values=lang_names, state="readonly", width=40,
-        )
-        current_lang = self.lang_reverse.get(self.lang_var.get(), "Chinese (Mandarin)")
-        self.lang_combo.set(current_lang)
-        self.lang_combo.pack(fill="x")
 
         # ─ Buffer duration ─
         ttk.Label(self.root, text="Buffer Duration (seconds)").pack(anchor="w", **pad)
@@ -271,47 +248,63 @@ class SettingsWindow:
             messagebox.showwarning("No Audio Device", "No audio input devices found.")
             return
 
-        lang_name = self.lang_combo.get()
-        source_lang = self.lang_display.get(lang_name, "zh")
         buffer_dur = self.buffer_var.get()
-
         skip_english = self.skip_english_var.get()
 
-        # Persist settings
+        # Persist settings. A failure here must not block translation.
         save_api_key(api_key)
         self.settings["audio_device_index"] = device["index"]
         self.settings["audio_loopback"] = device["loopback"]
-        self.settings["source_language"] = source_lang
         self.settings["buffer_duration"] = buffer_dur
         self.settings["skip_english"] = skip_english
-        save_settings(self.settings)
+        try:
+            save_settings(self.settings)
+        except OSError as e:
+            logging.error("Could not save settings: %s", e)
 
-        # Reset state
-        self.stop_event.clear()
-        self.audio_queue = queue.Queue()
+        # Each session gets its own stop event, queue and overlay. Threads from
+        # a stopped session may still be finishing an API call; they hold the
+        # old, set event, so they exit and cannot feed the new session.
+        stop_event = threading.Event()
+        audio_queue = queue.Queue(maxsize=AUDIO_QUEUE_SIZE)
+        overlay = TranslationOverlay(self.root, self.settings)
+        self.stop_event = stop_event
+        self.overlay = overlay
 
-        # Show overlay
-        self.overlay = TranslationOverlay(self.root, self.settings)
+        def post(callback, *args):
+            """Run callback on the Tk thread while this session is current.
 
-        # Start threads
+            self.overlay changes only on the Tk thread, so the check inside
+            run_if_current is exact. The early check skips root.after() once
+            the session is over, when the window may already be destroyed.
+            """
+            def run_if_current():
+                if self.overlay is overlay:
+                    callback(*args)
+
+            if self.overlay is overlay:
+                self.root.after(0, run_if_current)
+
+        def on_error(message):
+            post(self._show_error, message)
+
         self.capture_thread = AudioCaptureThread(
             device_index=device["index"],
             buffer_duration=buffer_dur,
-            output_queue=self.audio_queue,
-            stop_event=self.stop_event,
-            on_error=lambda msg: self.root.after(0, self._show_error, msg),
+            output_queue=audio_queue,
+            stop_event=stop_event,
+            on_error=on_error,
             loopback=device["loopback"],
             device_channels=device["channels"],
             device_rate=device["default_rate"],
         )
         self.translator_thread = TranslatorThread(
             api_key=api_key,
-            source_language=source_lang,
             skip_english=skip_english,
-            input_queue=self.audio_queue,
-            on_translation=lambda text: self.root.after(0, self.overlay.add_caption, text),
-            on_error=lambda msg: self.root.after(0, self._show_error, msg),
-            stop_event=self.stop_event,
+            input_queue=audio_queue,
+            on_translation=lambda text: post(overlay.add_caption, text),
+            on_error=on_error,
+            stop_event=stop_event,
         )
 
         self.capture_thread.start()
@@ -335,6 +328,7 @@ class SettingsWindow:
     def _show_error(self, message: str):
         self.status_var.set(f"Error: {message}")
         self.status_label.config(foreground="red")
+        logging.error(message)
 
     def _on_close(self):
         if self.is_running:

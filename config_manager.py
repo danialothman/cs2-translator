@@ -6,16 +6,23 @@ API key is stored in Windows Credential Manager via keyring.
 
 import json
 import os
+import tempfile
 import keyring
 
-SETTINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "settings.json")
+# Per-user, writable location. The app directory is not: a packaged build
+# may live under Program Files, and PyInstaller puts __file__ in _internal/.
+SETTINGS_DIR = os.path.join(
+    os.environ.get("APPDATA") or os.path.expanduser("~"), "CS2Translator",
+)
+SETTINGS_PATH = os.path.join(SETTINGS_DIR, "settings.json")
 KEYRING_SERVICE = "cs2-voice-translator"
 KEYRING_USERNAME = "openai-api-key"
 
 DEFAULTS = {
     "audio_device_index": None,
+    "audio_loopback": False,
     "buffer_duration": 3.0,
-    "source_language": "zh",
+    "skip_english": True,
     "max_captions": 5,
     "overlay_alpha": 0.8,
     "window_width": 500,
@@ -51,16 +58,27 @@ def load_settings() -> dict:
         try:
             with open(SETTINGS_PATH, "r") as f:
                 saved = json.load(f)
-            # Remove api_key if it was left in settings.json from before
-            saved.pop("api_key", None)
-            settings.update(saved)
+            # Ignore keys this version does not use, such as an api_key
+            # or source_language left in settings.json by an older version.
+            settings.update({k: v for k, v in saved.items() if k in DEFAULTS})
         except (json.JSONDecodeError, OSError):
             pass
     return settings
 
 
 def save_settings(settings: dict) -> None:
-    """Save settings dict to JSON file (without API key)."""
-    to_save = {k: v for k, v in settings.items() if k != "api_key"}
-    with open(SETTINGS_PATH, "w") as f:
-        json.dump(to_save, f, indent=2)
+    """Save known settings to the JSON file. The API key is never written here.
+
+    Writes to a temp file and renames it, so a crash cannot leave a
+    half-written settings.json.
+    """
+    to_save = {k: v for k, v in settings.items() if k in DEFAULTS}
+    os.makedirs(SETTINGS_DIR, exist_ok=True)
+    fd, tmp_path = tempfile.mkstemp(dir=SETTINGS_DIR, suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w") as f:
+            json.dump(to_save, f, indent=2)
+        os.replace(tmp_path, SETTINGS_PATH)
+    except BaseException:
+        os.unlink(tmp_path)
+        raise

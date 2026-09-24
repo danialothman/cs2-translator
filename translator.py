@@ -5,11 +5,14 @@ OpenAI Whisper API integration for speech translation
 
 import queue
 import threading
-import time
 import logging
 from openai import OpenAI, APIError, AuthenticationError, RateLimitError
 
 logger = logging.getLogger(__name__)
+
+MODEL = "whisper-1"
+REQUEST_TIMEOUT = 20.0  # seconds per attempt
+MAX_RETRIES = 2
 
 
 # Common Whisper hallucinations on silence/noise
@@ -42,12 +45,15 @@ def _is_hallucination(text: str, language: str) -> bool:
 
 
 class TranslatorThread(threading.Thread):
-    """Daemon thread that takes WAV buffers and calls OpenAI's translation API."""
+    """Daemon thread that takes WAV byte chunks and calls OpenAI's translation API.
+
+    Whisper's translation endpoint detects the spoken language itself, so no
+    source language is passed in.
+    """
 
     def __init__(
         self,
         api_key: str,
-        source_language: str,
         skip_english: bool,
         input_queue: queue.Queue,
         on_translation: callable,
@@ -55,8 +61,11 @@ class TranslatorThread(threading.Thread):
         stop_event: threading.Event,
     ):
         super().__init__(daemon=True)
-        self.client = OpenAI(api_key=api_key)
-        self.source_language = source_language
+        # The SDK retries rate limits, 5xx and connection errors with backoff.
+        # A short timeout keeps a hung request from outliving a stopped session.
+        self.client = OpenAI(
+            api_key=api_key, timeout=REQUEST_TIMEOUT, max_retries=MAX_RETRIES,
+        )
         self.skip_english = skip_english
         self.input_queue = input_queue
         self.on_translation = on_translation
@@ -66,78 +75,59 @@ class TranslatorThread(threading.Thread):
     def run(self):
         while not self.stop_event.is_set():
             try:
-                wav_buffer = self.input_queue.get(timeout=1)
+                wav_bytes = self.input_queue.get(timeout=1)
             except queue.Empty:
                 continue
 
-            retries = 0
-            while retries < 3:
-                try:
-                    if self.skip_english:
-                        # Transcribe first to detect language
-                        response = self.client.audio.transcriptions.create(
-                            model="whisper-1",
-                            file=wav_buffer,
-                            response_format="verbose_json",
-                        )
+            try:
+                self._process(wav_bytes)
+            except AuthenticationError:
+                self.on_error("Invalid API key. Please check your OpenAI API key.")
+                self.stop_event.set()
+                return
+            except RateLimitError as e:
+                # Also raised for an exhausted quota, so show the API's message.
+                self.on_error(f"Rate limited by OpenAI: {e.message}")
+            except APIError as e:
+                self.on_error(f"OpenAI API error: {e.message}")
+            except Exception as e:
+                self.on_error(f"Translation error: {e}")
 
-                        detected_lang = getattr(response, "language", "unknown")
-                        text = getattr(response, "text", "").strip()
+    def _process(self, wav_bytes: bytes) -> None:
+        """Translate one chunk and report the result."""
+        # Raw bytes have no read position, so every attempt sends the full chunk.
+        audio_file = ("audio.wav", wav_bytes, "audio/wav")
 
-                        if not text:
-                            break
+        if self.skip_english:
+            # Transcribe first to detect the language
+            response = self.client.audio.transcriptions.create(
+                model=MODEL,
+                file=audio_file,
+                response_format="verbose_json",
+            )
+            detected_lang = getattr(response, "language", "unknown")
+            text = getattr(response, "text", "").strip()
 
-                        if _is_hallucination(text, detected_lang):
-                            logger.info("Filtered hallucination [%s]: %s", detected_lang, text)
-                            break
+            if not text:
+                return
+            if _is_hallucination(text, detected_lang):
+                logger.info("Filtered hallucination [%s]: %s", detected_lang, text)
+                return
+            if detected_lang == "english":
+                logger.info("Skipped (English): %s", text)
+                return
+            logger.info("Detected [%s]: %s", detected_lang, text)
 
-                        if detected_lang == "english":
-                            logger.info("Skipped (English): %s", text)
-                            break
-
-                        # Translate non-English audio
-                        logger.info("Detected [%s]: %s", detected_lang, text)
-                        wav_buffer.seek(0)
-                        translation = self.client.audio.translations.create(
-                            model="whisper-1",
-                            file=wav_buffer,
-                            response_format="text",
-                        )
-                        translated = translation.strip()
-                        if translated:
-                            logger.info("Translation: %s", translated)
-                            self.on_translation(translated)
-                    else:
-                        # Translate everything directly (single API call)
-                        response = self.client.audio.translations.create(
-                            model="whisper-1",
-                            file=wav_buffer,
-                            response_format="text",
-                        )
-                        text = response.strip()
-                        if text and not _is_hallucination(text, ""):
-                            logger.info("Translation: %s", text)
-                            self.on_translation(text)
-                        elif text:
-                            logger.info("Filtered hallucination: %s", text)
-                    break
-
-                except AuthenticationError:
-                    self.on_error("Invalid API key. Please check your OpenAI API key.")
-                    self.stop_event.set()
-                    return
-
-                except RateLimitError:
-                    retries += 1
-                    if retries < 3:
-                        time.sleep(1)
-                    else:
-                        self.on_error("Rate limited by OpenAI. Please try again shortly.")
-
-                except APIError as e:
-                    self.on_error(f"OpenAI API error: {e.message}")
-                    break
-
-                except Exception as e:
-                    self.on_error(f"Translation error: {e}")
-                    break
+        translation = self.client.audio.translations.create(
+            model=MODEL,
+            file=audio_file,
+            response_format="text",
+        )
+        text = translation.strip()
+        if not text:
+            return
+        if not self.skip_english and _is_hallucination(text, ""):
+            logger.info("Filtered hallucination: %s", text)
+            return
+        logger.info("Translation: %s", text)
+        self.on_translation(text)
