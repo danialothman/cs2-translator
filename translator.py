@@ -37,6 +37,9 @@ BOGUS_LANGUAGES = {"nynorsk", "hawaiian", "maori", "haitian creole", "latin"}
 
 def _is_hallucination(text: str, language: str) -> bool:
     """Check if transcription is a known Whisper hallucination."""
+    # Whisper returns bare punctuation such as ". . ." for quiet noise.
+    if not any(ch.isalnum() for ch in text):
+        return True
     normalized = text.lower().strip().rstrip(".!,")
     if normalized in HALLUCINATIONS:
         return True
