@@ -12,6 +12,7 @@ CS2 Translator is a Windows desktop app that translates foreign-language voice c
 pip install -r requirements.txt
 python app.py        # opens the settings window
 python build.py      # packages dist/CS2Translator/ with PyInstaller (needs `pip install pyinstaller`)
+python -m evals.run --set smoke   # live eval with a real API key; see evals/README.md
 ```
 
 Windows only: `pyaudiowpatch` (WASAPI loopback) and the keyring Windows backend have no Linux or macOS equivalents here. Pushing a `v*` tag runs `.github/workflows/release.yml`, which builds the .exe and publishes a GitHub release.
@@ -20,9 +21,10 @@ Windows only: `pyaudiowpatch` (WASAPI loopback) and the keyring Windows backend 
 
 - **app.py** — entry point; starts `SettingsWindow`.
 - **settings_window.py** — `SettingsWindow`: main Tk window (API key, device picker, buffer duration, Skip English toggle, log panel). Owns the session lifecycle in `_start`/`_stop`.
-- **audio_capture.py** — `list_audio_devices()` and `AudioCaptureThread`: reads PCM, downmixes and resamples to 16 kHz mono, and emits WAV `bytes` once per buffer duration.
-- **translator.py** — `TranslatorThread`: sends each chunk to the translations endpoint. With Skip English on, it first calls the transcriptions endpoint to detect the language. Also filters known Whisper hallucinations.
+- **audio_capture.py** — `list_audio_devices()`, `ChunkAssembler` (downmixes and resamples each read to 16 kHz mono and emits WAV `bytes` once per buffer duration) and `AudioCaptureThread`, which feeds device reads to it.
+- **translator.py** — `translate_chunk()` sends one chunk to the translations endpoint and decides whether to show it. With Skip English on, it first calls the transcriptions endpoint to detect the language. It also filters known Whisper hallucinations. `TranslatorThread` pulls chunks from the queue and calls it.
 - **overlay.py** — `TranslationOverlay`: draggable, semi-transparent `Toplevel` showing the last N timestamped captions.
+- **evals/** — `run.py` feeds `clips/` through `ChunkAssembler` and `translate_chunk` against the real API, caches responses and scores them. `build_clips.py` rebuilds the FLEURS and synthetic clips.
 - **config_manager.py** — settings in `%APPDATA%\CS2Translator\settings.json` (atomic write; only keys in `DEFAULTS` are loaded or saved). The API key lives in Windows Credential Manager via `keyring`, never in the JSON file.
 
 Data flow: audio device → `AudioCaptureThread` → bounded `queue.Queue` → `TranslatorThread` → `root.after` → overlay.
@@ -46,6 +48,8 @@ Data flow: audio device → `AudioCaptureThread` → bounded `queue.Queue` → `
 - **NEXT.md** — pending work and roadmap. Remove an item when it ships; add new work there.
 - **DECISION.md** — append-only decision log. Add a new `D-NNN` entry at the bottom for any design choice or trade-off. Never edit or delete earlier entries; to reverse one, add an entry that supersedes it.
 
-## No Test Suite or Linter
+## Evals, No Test Suite or Linter
 
-There are no automated tests or lint configuration. Audio capture and the GUI need Windows to run end to end.
+There are no unit tests or lint configuration. Audio capture and the GUI need Windows to run end to end.
+
+`evals/` measures translation quality with a real API key (see `evals/README.md`). Keep per-chunk decisions in `translate_chunk` and chunking in `ChunkAssembler` so the evals keep covering the code that ships. Run `python -m evals.run --set full --compare evals/baseline-full.json` before and after changes to capture, chunking, filtering or the model. A live run costs money: start with `--dry-run`, and ask before running uncached.

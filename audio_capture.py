@@ -104,6 +104,33 @@ def _resample_mono(data: bytes, src_channels: int, src_rate: int) -> bytes:
     return samples.tobytes()
 
 
+class ChunkAssembler:
+    """Turns device reads of CHUNK frames into WAV chunks of buffer_duration.
+
+    Each read is converted to 16 kHz mono on its own, as it arrives. The evals
+    in evals/run.py feed clip audio through this class, so keep all chunking
+    and conversion here.
+    """
+
+    def __init__(self, channels: int, rate: int, buffer_duration: float):
+        self.channels = channels
+        self.rate = rate
+        self.reads_needed = int(rate / CHUNK * buffer_duration)
+        self.needs_conversion = channels > 1 or rate != SAMPLE_RATE
+        self.frames: list[bytes] = []
+
+    def feed(self, data: bytes) -> bytes | None:
+        """Add one read. Return a WAV chunk when the buffer is full."""
+        if self.needs_conversion:
+            data = _resample_mono(data, self.channels, self.rate)
+        self.frames.append(data)
+        if len(self.frames) >= self.reads_needed:
+            wav = build_wav(self.frames)
+            self.frames = []
+            return wav
+        return None
+
+
 class AudioCaptureThread(threading.Thread):
     """Daemon thread that captures audio and produces WAV byte chunks."""
 
@@ -146,23 +173,17 @@ class AudioCaptureThread(threading.Thread):
             p.terminate()
             return
 
-        chunks_needed = int(self.device_rate / CHUNK * self.buffer_duration)
-        frames: list[bytes] = []
-        needs_conversion = self.device_channels > 1 or self.device_rate != SAMPLE_RATE
+        assembler = ChunkAssembler(
+            self.device_channels, self.device_rate, self.buffer_duration,
+        )
 
         try:
             while not self.stop_event.is_set():
                 try:
                     data = stream.read(CHUNK, exception_on_overflow=False)
-
-                    if needs_conversion:
-                        data = _resample_mono(data, self.device_channels, self.device_rate)
-
-                    frames.append(data)
-
-                    if len(frames) >= chunks_needed:
-                        _put_latest(self.output_queue, build_wav(frames))
-                        frames = []
+                    wav = assembler.feed(data)
+                    if wav is not None:
+                        _put_latest(self.output_queue, wav)
                 except OSError as e:
                     self.on_error(f"Audio read error: {e}")
                     break

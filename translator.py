@@ -6,6 +6,7 @@ OpenAI Whisper API integration for speech translation
 import queue
 import threading
 import logging
+from dataclasses import dataclass
 from openai import OpenAI, APIError, AuthenticationError, RateLimitError
 
 logger = logging.getLogger(__name__)
@@ -44,6 +45,72 @@ def _is_hallucination(text: str, language: str) -> bool:
     return False
 
 
+def make_client(api_key: str) -> OpenAI:
+    """Create the OpenAI client with the app's retry and timeout settings."""
+    # The SDK retries rate limits, 5xx and connection errors with backoff.
+    # A short timeout keeps a hung request from outliving a stopped session.
+    return OpenAI(api_key=api_key, timeout=REQUEST_TIMEOUT, max_retries=MAX_RETRIES)
+
+
+@dataclass
+class ChunkResult:
+    """Outcome of one audio chunk.
+
+    reason is "caption" when text should be shown, otherwise why it was dropped:
+    "empty", "hallucination" or "english". language is only known with
+    Skip English on, because only the transcription call reports it.
+    """
+
+    text: str | None
+    reason: str
+    language: str | None = None
+
+
+def translate_chunk(client: OpenAI, wav_bytes: bytes, skip_english: bool) -> ChunkResult:
+    """Translate one WAV chunk to English and decide whether to show it.
+
+    API errors propagate to the caller. The evals in evals/run.py call this
+    function directly, so keep all per-chunk decisions here.
+    """
+    # Raw bytes have no read position, so every attempt sends the full chunk.
+    audio_file = ("audio.wav", wav_bytes, "audio/wav")
+    detected_lang = None
+
+    if skip_english:
+        # Transcribe first to detect the language
+        response = client.audio.transcriptions.create(
+            model=MODEL,
+            file=audio_file,
+            response_format="verbose_json",
+        )
+        detected_lang = getattr(response, "language", "unknown")
+        text = getattr(response, "text", "").strip()
+
+        if not text:
+            return ChunkResult(None, "empty", detected_lang)
+        if _is_hallucination(text, detected_lang):
+            logger.info("Filtered hallucination [%s]: %s", detected_lang, text)
+            return ChunkResult(None, "hallucination", detected_lang)
+        if detected_lang == "english":
+            logger.info("Skipped (English): %s", text)
+            return ChunkResult(None, "english", detected_lang)
+        logger.info("Detected [%s]: %s", detected_lang, text)
+
+    translation = client.audio.translations.create(
+        model=MODEL,
+        file=audio_file,
+        response_format="text",
+    )
+    text = translation.strip()
+    if not text:
+        return ChunkResult(None, "empty", detected_lang)
+    if not skip_english and _is_hallucination(text, ""):
+        logger.info("Filtered hallucination: %s", text)
+        return ChunkResult(None, "hallucination", detected_lang)
+    logger.info("Translation: %s", text)
+    return ChunkResult(text, "caption", detected_lang)
+
+
 class TranslatorThread(threading.Thread):
     """Daemon thread that takes WAV byte chunks and calls OpenAI's translation API.
 
@@ -61,11 +128,7 @@ class TranslatorThread(threading.Thread):
         stop_event: threading.Event,
     ):
         super().__init__(daemon=True)
-        # The SDK retries rate limits, 5xx and connection errors with backoff.
-        # A short timeout keeps a hung request from outliving a stopped session.
-        self.client = OpenAI(
-            api_key=api_key, timeout=REQUEST_TIMEOUT, max_retries=MAX_RETRIES,
-        )
+        self.client = make_client(api_key)
         self.skip_english = skip_english
         self.input_queue = input_queue
         self.on_translation = on_translation
@@ -95,39 +158,6 @@ class TranslatorThread(threading.Thread):
 
     def _process(self, wav_bytes: bytes) -> None:
         """Translate one chunk and report the result."""
-        # Raw bytes have no read position, so every attempt sends the full chunk.
-        audio_file = ("audio.wav", wav_bytes, "audio/wav")
-
-        if self.skip_english:
-            # Transcribe first to detect the language
-            response = self.client.audio.transcriptions.create(
-                model=MODEL,
-                file=audio_file,
-                response_format="verbose_json",
-            )
-            detected_lang = getattr(response, "language", "unknown")
-            text = getattr(response, "text", "").strip()
-
-            if not text:
-                return
-            if _is_hallucination(text, detected_lang):
-                logger.info("Filtered hallucination [%s]: %s", detected_lang, text)
-                return
-            if detected_lang == "english":
-                logger.info("Skipped (English): %s", text)
-                return
-            logger.info("Detected [%s]: %s", detected_lang, text)
-
-        translation = self.client.audio.translations.create(
-            model=MODEL,
-            file=audio_file,
-            response_format="text",
-        )
-        text = translation.strip()
-        if not text:
-            return
-        if not self.skip_english and _is_hallucination(text, ""):
-            logger.info("Filtered hallucination: %s", text)
-            return
-        logger.info("Translation: %s", text)
-        self.on_translation(text)
+        result = translate_chunk(self.client, wav_bytes, self.skip_english)
+        if result.text:
+            self.on_translation(result.text)
