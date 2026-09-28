@@ -131,13 +131,15 @@ cs2-translator/
 ├── docs/               # README screenshots
 ├── requirements.txt    # Python dependencies
 ├── build.py            # PyInstaller build script
+├── CONTRIBUTING.md     # Architecture, rules and workflow for contributors
 ├── version.py          # App version (bumped by release-please)
 ├── CHANGELOG.md        # Release notes, written by release-please
-├── NEXT.md             # Pending work and roadmap
-├── DECISION.md         # Append-only log of design decisions
-├── CLAUDE.md           # Guidance for Claude Code
 └── .github/workflows/  # Release PR, .exe build, manual eval
 ```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the architecture, threading rules, commit conventions and how to run the evals.
 
 ## Credits
 
