@@ -1,19 +1,19 @@
 {
   "config": {
-    "timestamp": "2026-09-28T23:14:25",
+    "timestamp": "2026-09-28T23:21:42",
     "set": "full",
     "model": "whisper-1",
     "buffer_duration": 3.0,
-    "commit": "044127b-dirty",
+    "commit": "ca5dc33-dirty",
     "cache": true
   },
   "pipelines": {
     "whisper1": {
       "summary": {
         "clips": 52,
-        "false_caption_rate": 0.2,
+        "false_caption_rate": 0.0,
         "false_caption_by_category": {
-          "nonspeech": 0.2
+          "nonspeech": 0.0
         },
         "missed_caption_rate": 0.0,
         "chrf": 39.9,
@@ -1089,12 +1089,12 @@
               "language": null
             },
             {
-              "text": ".",
-              "reason": "caption",
+              "text": null,
+              "reason": "hallucination",
               "language": null
             }
           ],
-          "caption": "However, due to the slow communication channels. Stiles in the West could... lag behind by 25 to 30 years. ."
+          "caption": "However, due to the slow communication channels. Stiles in the West could... lag behind by 25 to 30 years."
         },
         {
           "id": "english-1914",
@@ -1114,12 +1114,12 @@
               "language": null
             },
             {
-              "text": ".",
-              "reason": "caption",
+              "text": null,
+              "reason": "hallucination",
               "language": null
             }
           ],
-          "caption": "20th century research has shown that there... are two pools of genetic variation hidden and expressed. ."
+          "caption": "20th century research has shown that there... are two pools of genetic variation hidden and expressed."
         },
         {
           "id": "english-1938",
@@ -1254,13 +1254,13 @@
           "reference": "",
           "chunks": [
             {
-              "text": ".",
-              "reason": "caption",
+              "text": null,
+              "reason": "hallucination",
               "language": null
             },
             {
-              "text": ". .",
-              "reason": "caption",
+              "text": null,
+              "reason": "hallucination",
               "language": null
             },
             {
@@ -1269,7 +1269,7 @@
               "language": null
             }
           ],
-          "caption": ". . ."
+          "caption": ""
         },
         {
           "id": "nonspeech-white-loud",
@@ -1304,13 +1304,13 @@
           "reference": "",
           "chunks": [
             {
-              "text": ".",
-              "reason": "caption",
+              "text": null,
+              "reason": "hallucination",
               "language": null
             },
             {
-              "text": ".",
-              "reason": "caption",
+              "text": null,
+              "reason": "hallucination",
               "language": null
             },
             {
@@ -1319,7 +1319,7 @@
               "language": null
             }
           ],
-          "caption": ". ."
+          "caption": ""
         },
         {
           "id": "nonspeech-pink-loud",
@@ -2568,7 +2568,7 @@
             },
             {
               "text": null,
-              "reason": "english",
+              "reason": "hallucination",
               "language": "english"
             }
           ],
@@ -2594,7 +2594,7 @@
             },
             {
               "text": null,
-              "reason": "english",
+              "reason": "hallucination",
               "language": "english"
             }
           ],
@@ -2738,12 +2738,12 @@
           "chunks": [
             {
               "text": null,
-              "reason": "english",
+              "reason": "hallucination",
               "language": "english"
             },
             {
               "text": null,
-              "reason": "english",
+              "reason": "hallucination",
               "language": "english"
             },
             {
@@ -2788,12 +2788,12 @@
           "chunks": [
             {
               "text": null,
-              "reason": "english",
+              "reason": "hallucination",
               "language": "english"
             },
             {
               "text": null,
-              "reason": "english",
+              "reason": "hallucination",
               "language": "english"
             },
             {
