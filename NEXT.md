@@ -14,6 +14,15 @@ Pending work, in priority order. Edit this file freely: remove an item when it s
 - [ ] **Tag a release** only after the Windows test passes.
 - [ ] **Add a LICENSE file.** The README says MIT, but the repo has no LICENSE file, so the code is not yet licensed. The copyright holder must choose the name and year.
 
+## Evals
+
+The harness is in [evals/](evals/README.md). Run it before and after every Phase 1 and 2 change.
+
+- [ ] **Record CS2 audio.** Record game audio with no voices (gunfire, footsteps, utility) and 10 callouts ("rush B", "AWP mid") with references. Add the game audio as `nonspeech` clips, and mix it under half the FLEURS speech at 0–10 dB SNR in `build_clips.py`.
+- [ ] **Add a manual CI job.** A `workflow_dispatch` job runs `python -m evals.run --set smoke` with an `OPENAI_API_KEY` repo secret.
+- [ ] **Fix: punctuation-only captions.** With Skip English off, quiet white and pink noise produce captions like `". . ."` in every run (false caption rate 0.2 in the baseline). `_is_hallucination` strips only trailing punctuation. Update the baseline with the fix.
+- [ ] **Investigate: Skip English drops foreign speech.** In the full baseline, 2 of 111 foreign speech chunks were detected as English and dropped, and one Ukrainian clip was detected as Russian. Silence-based cutting (Phase 1) may help. Track it with chrF and `language_accuracy`.
+
 ## Phase 1: Cost and latency
 
 The app sends every chunk to the API, including silence. This is the rate-limiting step for cost.
@@ -27,8 +36,8 @@ The app sends every chunk to the API, including silence. This is the rate-limiti
 
 - [ ] Replace the index-picking resampler in `audio_capture._resample_mono` with a filtered one (`scipy.signal.resample_poly`). The current one aliases 48 kHz loopback audio.
 - [ ] Filter hallucinations with `no_speech_prob` and `avg_logprob` from `verbose_json` segments, not only a phrase list.
-- [ ] Compare `gpt-4o-mini-transcribe` plus LLM translation against `whisper-1`. Check current OpenAI pricing and model docs first.
-- [ ] Record 50 match clips and score both pipelines by hand.
+- [ ] Compare `gpt-4o-mini-transcribe` plus LLM translation against `whisper-1` as a new eval pipeline. Check current OpenAI pricing and model docs first.
+- [ ] Add about 50 private match clips to the eval set and score both pipelines by hand before switching models.
 
 ## Phase 3: UX
 

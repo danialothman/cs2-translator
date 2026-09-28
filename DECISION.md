@@ -89,3 +89,38 @@ Append-only log of decisions made during development.
 - **Context:** The roadmap and design choices lived only in chat and PR descriptions.
 - **Decision:** NEXT.md holds pending work and is edited freely. DECISION.md is append-only. CLAUDE.md tells Claude Code to use both.
 - **Trade-off:** Two more files to keep current. A stale NEXT.md misleads more than a missing one.
+
+## D-011: Evaluate with real API calls through the shipped code
+- **Date:** 2026-09-28
+- **Status:** Accepted
+- **Context:** Phases 1 and 2 change what goes to the API and what comes back. A mocked API cannot show whether a change adds hallucinations or loses speech.
+- **Decision:** `evals/run.py` calls the real API with a real key. It feeds clips through `audio_capture.ChunkAssembler` and `translator.translate_chunk`, which were extracted from the capture and translator threads so the app and the eval run the same code.
+- **Trade-off:** Every live run costs money and needs a key. Threads, the device and the overlay stay untested.
+
+## D-012: Cache eval responses and cap spend per run
+- **Date:** 2026-09-28
+- **Status:** Accepted
+- **Context:** Most eval runs repeat chunks the API has already seen.
+- **Decision:** Cache responses in `evals/.cache/`, keyed by SHA-256 of the WAV bytes, endpoint and params. Print a cost estimate first and abort above `--max-cost`.
+- **Trade-off:** A cached run hides nondeterminism in the API. Use `--no-cache` to measure it.
+
+## D-013: Build the clip set from FLEURS plus synthetic noise
+- **Date:** 2026-09-28
+- **Status:** Accepted
+- **Context:** Clips need English references and a license that allows committing them. Real match audio has neither.
+- **Decision:** Take foreign and English speech from FLEURS (CC BY 4.0, parallel sentences give the references). Use synthetic noise for non-speech until CS2 game audio is recorded. Keep real match recordings in a gitignored `evals/clips/private/`.
+- **Trade-off:** FLEURS is clean read speech at 16 kHz, easier than shouted callouts over gunfire. Scores will be higher than in a match.
+
+## D-014: Score translations with chrF, not an LLM judge
+- **Date:** 2026-09-28
+- **Status:** Accepted
+- **Context:** An LLM judge adds cost, another API and its own run-to-run noise.
+- **Decision:** Use corpus chrF (`sacrebleu`) against the reference for regressions. Keep hand scoring for the final model choice in Phase 2.
+- **Trade-off:** chrF rewards surface overlap. A correct paraphrase scores lower than it should.
+
+## D-015: Run live evals by hand, not on every pull request
+- **Date:** 2026-09-28
+- **Status:** Accepted
+- **Context:** Pull requests from forks cannot read repository secrets, and each run spends money.
+- **Decision:** Live evals run locally or from a manual `workflow_dispatch` job. Offline checks belong in the pytest suite.
+- **Trade-off:** A regression can merge if nobody runs the eval before merging.
