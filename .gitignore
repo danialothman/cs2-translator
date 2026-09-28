@@ -185,6 +185,12 @@ settings.json
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+# Local notes
+CLAUDE.md
+NEXT.md
+DECISION.md
+.claude/
+
 # Evals
 evals/.cache/
 evals/results/
