@@ -67,3 +67,12 @@ Each run writes `results/<timestamp>-<set>.json` (per chunk text, reason and lan
 ## Baseline and regressions
 
 `evals/baseline-full.json` is the committed reference. `--compare <file>` exits 1 when a metric moves the wrong way by more than its limit in `thresholds.json`. The limits sit above the spread of 3 uncached runs of the same code, so a failure is unlikely to be noise. After an intended change, rerun with `--save-baseline` and commit the new baseline with the change.
+
+## CI
+
+`.github/workflows/eval.yml` runs the eval by hand from the Actions tab (**Eval**, then **Run workflow**). It needs an `OPENAI_API_KEY` repository secret. It never runs on pull requests (D-015).
+
+- The `full` set is compared against `baseline-full.json` and the job fails on a regression. The `smoke` set only reports, because its thresholds are not calibrated: one clip changes a rate by 0.1 or more.
+- The response cache is kept between runs with `actions/cache`, so a rerun with no pipeline change is free. Tick **no_cache** to measure run-to-run noise.
+- The summary appears on the run page, and the full JSON is uploaded as the `eval-results` artifact.
+- Latency is measured from GitHub's runner, not a player's PC. Compare it only with other CI runs.

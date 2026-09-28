@@ -11,7 +11,7 @@ Pending work, in priority order. Edit this file freely: remove an item when it s
   - [ ] Settings save to `%APPDATA%\CS2Translator\settings.json`, and the file contains no API key.
   - [ ] An invalid API key shows "Invalid API key" in the status line.
   - [ ] The PyInstaller build from `python build.py` starts and saves settings.
-- [ ] **Tag a release** only after the Windows test passes.
+- [ ] **Merge the release PR** that release-please opens (1.1.0) only after the Windows test passes. Before merging, add the pre-convention fixes since 1.0.0 (session lifecycle, bounded latency, settings in APPDATA) to its CHANGELOG entry: those commits have no `fix:` prefix, so release-please leaves them out.
 - [ ] **Add a LICENSE file.** The README says MIT, but the repo has no LICENSE file, so the code is not yet licensed. The copyright holder must choose the name and year.
 
 ## Evals
@@ -19,7 +19,6 @@ Pending work, in priority order. Edit this file freely: remove an item when it s
 The harness is in [evals/](evals/README.md). Run it before and after every Phase 1 and 2 change.
 
 - [ ] **Record CS2 audio.** Record game audio with no voices (gunfire, footsteps, utility) and 10 callouts ("rush B", "AWP mid") with references. Add the game audio as `nonspeech` clips, and mix it under half the FLEURS speech at 0–10 dB SNR in `build_clips.py`.
-- [ ] **Add a manual CI job.** A `workflow_dispatch` job runs `python -m evals.run --set smoke` with an `OPENAI_API_KEY` repo secret.
 - [ ] **Investigate: Skip English drops foreign speech.** In the full baseline, 2 of 111 foreign speech chunks were detected as English and dropped, and one Ukrainian clip was detected as Russian. Silence-based cutting (Phase 1) may help. Track it with chrF and `language_accuracy`.
 
 ## Phase 1: Cost and latency

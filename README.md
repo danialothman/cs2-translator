@@ -131,10 +131,12 @@ cs2-translator/
 ├── docs/               # README screenshots
 ├── requirements.txt    # Python dependencies
 ├── build.py            # PyInstaller build script
+├── version.py          # App version (bumped by release-please)
+├── CHANGELOG.md        # Release notes, written by release-please
 ├── NEXT.md             # Pending work and roadmap
 ├── DECISION.md         # Append-only log of design decisions
 ├── CLAUDE.md           # Guidance for Claude Code
-└── .github/workflows/  # Windows .exe build and release on version tags
+└── .github/workflows/  # Release PR, .exe build, manual eval
 ```
 
 ## Credits

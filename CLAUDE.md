@@ -15,7 +15,7 @@ python build.py      # packages dist/CS2Translator/ with PyInstaller (needs `pip
 python -m evals.run --set smoke   # live eval with a real API key; see evals/README.md
 ```
 
-Windows only: `pyaudiowpatch` (WASAPI loopback) and the keyring Windows backend have no Linux or macOS equivalents here. Pushing a `v*` tag runs `.github/workflows/release.yml`, which builds the .exe and publishes a GitHub release.
+Windows only: `pyaudiowpatch` (WASAPI loopback) and the keyring Windows backend have no Linux or macOS equivalents here. Releases are automated by release-please in `.github/workflows/release.yml`: each push to `main` updates a release PR that bumps `version.py` and `CHANGELOG.md`. Merging that PR tags the version, creates the GitHub release and attaches the .exe. `.github/workflows/eval.yml` runs the live eval by hand (needs the `OPENAI_API_KEY` secret).
 
 ## Architecture
 
@@ -42,6 +42,13 @@ Data flow: audio device → `AudioCaptureThread` → bounded `queue.Queue` → `
 - The translations endpoint takes no `language` parameter; Whisper auto-detects the source language. Do not add a source-language setting unless something consumes it.
 - Keep the app free of game-process access (no injection, no memory reads). That is the basis of the README's anti-cheat claim.
 - Never log or persist the API key.
+- The repo is public (D-017). In workflows: pin every action to a full commit SHA with the version in a comment, start with `permissions: {}` and grant per job, set `persist-credentials: false` on checkout, pass inputs through `env`, and never use `pull_request_target`. A new third-party action must also be added to the repo's allowed-actions list.
+
+## Versioning and Commits
+
+- The project follows Semantic Versioning. The version lives only in `version.py` (and `.release-please-manifest.json`); release-please bumps both. Never edit them or released `CHANGELOG.md` entries by hand.
+- Every commit that lands on `main` must use Conventional Commits, since release-please reads them to pick the version and write the changelog. `feat:` bumps minor, `fix:` and `perf:` bump patch, and `feat!:` or a `BREAKING CHANGE:` footer bumps major. `docs:`, `refactor:`, `test:`, `ci:`, `build:` and `chore:` do not appear in the changelog.
+- PRs are merged with a merge commit (D-008), so the individual commit messages are what count, not the PR title.
 
 ## Planning Docs
 

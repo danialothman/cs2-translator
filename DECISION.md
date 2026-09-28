@@ -124,3 +124,17 @@ Append-only log of decisions made during development.
 - **Context:** Pull requests from forks cannot read repository secrets, and each run spends money.
 - **Decision:** Live evals run locally or from a manual `workflow_dispatch` job. Offline checks belong in the pytest suite.
 - **Trade-off:** A regression can merge if nobody runs the eval before merging.
+
+## D-016: Version and write the changelog with release-please
+- **Date:** 2026-09-28
+- **Status:** Accepted
+- **Context:** Releases were cut by pushing a `v*` tag by hand. Nothing set the version number, the app did not show one, and release notes came only from GitHub's PR list.
+- **Decision:** Follow Semantic Versioning, driven by Conventional Commits. release-please keeps a release PR open that bumps `version.py` and prepends to `CHANGELOG.md`. Merging it tags the version and creates the release, and the same workflow builds and attaches the .exe. The window title shows the version.
+- **Trade-off:** Every commit on `main` must follow the convention, or its change is missing from the changelog. A tag created with the workflow token does not trigger other workflows, so the build runs in the release workflow rather than on tag push.
+
+## D-017: Lock down GitHub Actions on the public repo
+- **Date:** 2026-09-28
+- **Status:** Accepted
+- **Context:** The repo is public. release-please needs Actions to open PRs, and the eval job holds a paid API key. Forks must not be able to run code with the repo's token or secrets.
+- **Decision:** No workflow runs on `pull_request_target` or other fork-triggered events. Workflows start with `permissions: {}` and grant per job. Checkout does not persist credentials, and dispatch inputs reach scripts only through env vars. Repo settings: only GitHub-owned actions and `googleapis/release-please-action` are allowed, every action must be pinned to a full commit SHA, the default token is read-only, and fork PRs from all outside contributors need approval before workflows run.
+- **Trade-off:** Adding an action means updating the allow list, and version bumps mean updating SHAs by hand.
