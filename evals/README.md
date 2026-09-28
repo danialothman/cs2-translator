@@ -70,7 +70,7 @@ Each run writes `results/<timestamp>-<set>.json` (per chunk text, reason and lan
 
 ## CI
 
-`.github/workflows/eval.yml` runs the eval by hand from the Actions tab (**Eval**, then **Run workflow**). It needs an `OPENAI_API_KEY` repository secret. It never runs on pull requests (D-015).
+`.github/workflows/eval.yml` runs the eval by hand from the Actions tab (**Eval**, then **Run workflow**). It needs an `OPENAI_API_KEY` repository secret. It never runs on pull requests: fork PRs cannot read secrets, and each run spends money.
 
 - The `full` set is compared against `baseline-full.json` and the job fails on a regression. The `smoke` set only reports, because its thresholds are not calibrated: one clip changes a rate by 0.1 or more.
 - The response cache is kept between runs with `actions/cache`, so a rerun with no pipeline change is free. Tick **no_cache** to measure run-to-run noise.
