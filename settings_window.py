@@ -14,6 +14,7 @@ from config_manager import load_settings, save_settings, load_api_key, save_api_
 from audio_capture import list_audio_devices, AudioCaptureThread
 from translator import TranslatorThread
 from overlay import TranslationOverlay
+from version import __version__
 
 # Audio chunks waiting for translation. Kept small so captions stay current:
 # when the API falls behind, the capture thread drops the oldest chunk.
@@ -37,7 +38,7 @@ class _TkLogHandler(logging.Handler):
 class SettingsWindow:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("CS2 Voice Translator")
+        self.root.title(f"CS2 Voice Translator v{__version__}")
         self.root.geometry("460x650")
         self.root.resizable(False, True)
 
