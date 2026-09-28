@@ -131,7 +131,9 @@ cs2-translator/
 ├── docs/               # README screenshots
 ├── requirements.txt    # Python dependencies
 ├── build.py            # PyInstaller build script
-└── .github/workflows/  # Windows .exe build and release on version tags
+├── version.py          # App version (bumped by release-please)
+├── CHANGELOG.md        # Release notes, written by release-please
+└── .github/workflows/  # Release PR, .exe build, manual eval
 ```
 
 ## Credits

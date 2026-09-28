@@ -1,0 +1,87 @@
+name: Eval
+
+# Live eval against the OpenAI API. It spends money, so it only runs by hand.
+# Needs the OPENAI_API_KEY repository secret. See evals/README.md.
+on:
+  workflow_dispatch:
+    inputs:
+      set:
+        description: "Clip set (only full is compared against the baseline)"
+        type: choice
+        options: [full, smoke]
+        default: full
+      max_cost:
+        description: "Abort if the estimate exceeds this, in USD"
+        default: "0.20"
+      no_cache:
+        description: "Call the API for every chunk (to measure run-to-run noise)"
+        type: boolean
+        default: false
+
+permissions: {}
+
+jobs:
+  eval:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt -r evals/requirements.txt
+
+      - name: Check the API key secret
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        shell: bash
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "::error::Add an OPENAI_API_KEY repository secret to run the eval."
+            exit 1
+          fi
+
+      # Responses are keyed by request, so a restored cache only skips calls
+      # the pipeline would make identically.
+      - name: Restore response cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: evals/.cache
+          key: eval-responses-${{ github.run_id }}
+          restore-keys: eval-responses-
+
+      - name: Run eval
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PYTHONIOENCODING: utf-8
+          # Inputs go through env, never straight into the script.
+          EVAL_SET: ${{ inputs.set }}
+          MAX_COST: ${{ inputs.max_cost }}
+          NO_CACHE: ${{ inputs.no_cache }}
+        shell: bash
+        run: |
+          args=(--set "$EVAL_SET" --max-cost "$MAX_COST")
+          if [ "$NO_CACHE" = "true" ]; then args+=(--no-cache); fi
+          if [ "$EVAL_SET" = "full" ]; then args+=(--compare evals/baseline-full.json); fi
+          python -m evals.run "${args[@]}"
+
+      - name: Write job summary
+        if: always()
+        shell: bash
+        run: cat evals/results/*.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: eval-results
+          path: evals/results/
+          if-no-files-found: ignore
