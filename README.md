@@ -44,6 +44,10 @@ python app.py
 
 The settings window opens where you can:
 
+<p align="center">
+  <img src="docs/settings-window.png" alt="CS2 Voice Translator settings window" width="400">
+</p>
+
 1. **Enter your OpenAI API key** (stored securely in Windows Credential Manager)
 2. **Select an audio device** — pick your speakers/headphones as a loopback device to capture game audio, or a microphone for direct input
 3. **Adjust buffer duration** — shorter = faster but less context, longer = more accurate
@@ -122,6 +126,7 @@ cs2-translator/
 ├── translator.py       # OpenAI Whisper API integration
 ├── audio_capture.py    # Audio device enumeration and capture
 ├── config_manager.py   # Settings persistence (JSON + keyring)
+├── docs/               # README screenshots
 ├── requirements.txt    # Python dependencies
 ├── build.py            # PyInstaller build script
 ├── NEXT.md             # Pending work and roadmap
