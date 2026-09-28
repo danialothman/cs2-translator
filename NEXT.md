@@ -20,7 +20,6 @@ The harness is in [evals/](evals/README.md). Run it before and after every Phase
 
 - [ ] **Record CS2 audio.** Record game audio with no voices (gunfire, footsteps, utility) and 10 callouts ("rush B", "AWP mid") with references. Add the game audio as `nonspeech` clips, and mix it under half the FLEURS speech at 0–10 dB SNR in `build_clips.py`.
 - [ ] **Add a manual CI job.** A `workflow_dispatch` job runs `python -m evals.run --set smoke` with an `OPENAI_API_KEY` repo secret.
-- [ ] **Fix: punctuation-only captions.** With Skip English off, quiet white and pink noise produce captions like `". . ."` in every run (false caption rate 0.2 in the baseline). `_is_hallucination` strips only trailing punctuation. Update the baseline with the fix.
 - [ ] **Investigate: Skip English drops foreign speech.** In the full baseline, 2 of 111 foreign speech chunks were detected as English and dropped, and one Ukrainian clip was detected as Russian. Silence-based cutting (Phase 1) may help. Track it with chrF and `language_accuracy`.
 
 ## Phase 1: Cost and latency
