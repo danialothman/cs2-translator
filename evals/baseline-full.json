@@ -1,0 +1,2939 @@
+{
+  "config": {
+    "timestamp": "2026-09-28T23:14:25",
+    "set": "full",
+    "model": "whisper-1",
+    "buffer_duration": 3.0,
+    "commit": "044127b-dirty",
+    "cache": true
+  },
+  "pipelines": {
+    "whisper1": {
+      "summary": {
+        "clips": 52,
+        "false_caption_rate": 0.2,
+        "false_caption_by_category": {
+          "nonspeech": 0.2
+        },
+        "missed_caption_rate": 0.0,
+        "chrf": 39.9,
+        "language_accuracy": null,
+        "latency_p50": null,
+        "latency_p95": null,
+        "latency_samples": 0,
+        "errors": 0
+      },
+      "clips": [
+        {
+          "id": "speech-ru_ru-1704",
+          "category": "speech",
+          "expect": "caption",
+          "language": "russian",
+          "reference": "In 1990, it was added to the list of world heritage sites in danger, due to the threat of desert sands.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "is added to the list of the world heritage sites.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "under threat of danger from the side of the sand in the desert.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "Thank you for your attention.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "is added to the list of the world heritage sites. under threat of danger from the side of the sand in the desert. Thank you for your attention.",
+          "chrf": 55.95
+        },
+        {
+          "id": "speech-ru_ru-1781",
+          "category": "speech",
+          "expect": "caption",
+          "language": "russian",
+          "reference": "Madagascar is by far the biggest, and a continent on its own when it comes to wildlife.",
+          "chunks": [
+            {
+              "text": "Madagascar",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "Scar is much larger than the others and is a self-proclaimed",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "wonder!",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "Madagascar Scar is much larger than the others and is a self-proclaimed wonder!",
+          "chrf": 25.14
+        },
+        {
+          "id": "speech-ru_ru-1917",
+          "category": "speech",
+          "expect": "caption",
+          "language": "russian",
+          "reference": "Several large television screens were installed in various places in Rome to let the people watch the ceremony.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "large television screens with the help of which people could",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "to watch the ceremony.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "large television screens with the help of which people could to watch the ceremony.",
+          "chrf": 48.43
+        },
+        {
+          "id": "speech-ru_ru-1926",
+          "category": "speech",
+          "expect": "caption",
+          "language": "russian",
+          "reference": "Accepted were Aristotle's views on all matters of science, including psychology.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": "questions, including psychology, were accepted.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "and the look of Aristotle.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "questions, including psychology, were accepted. and the look of Aristotle.",
+          "chrf": 49.49
+        },
+        {
+          "id": "speech-pt_br-1660",
+          "category": "speech",
+          "expect": "caption",
+          "language": "portuguese",
+          "reference": "Romanticism had a large element of cultural determinism, drawn from writers such as Goethe, Fichte, and Schlegel.",
+          "chunks": [
+            {
+              "text": "Romanticism had a great element of determinism.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "and cultural feminism, extracted from writers such as...",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "I am a goat, fished, escaped.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "I'll take care of you.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "Romanticism had a great element of determinism. and cultural feminism, extracted from writers such as... I am a goat, fished, escaped. I'll take care of you.",
+          "chrf": 53.44
+        },
+        {
+          "id": "speech-pt_br-1696",
+          "category": "speech",
+          "expect": "caption",
+          "language": "portuguese",
+          "reference": "The two compounds react with one another to form crystals that may block kidney function, researchers at the university said.",
+          "chunks": [
+            {
+              "text": "The two compounds react with each other.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "to form crystals that can block the flow of water.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "kidney function, said researchers.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "of the University.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "The two compounds react with each other. to form crystals that can block the flow of water. kidney function, said researchers. of the University.",
+          "chrf": 69.27
+        },
+        {
+          "id": "speech-pt_br-1853",
+          "category": "speech",
+          "expect": "caption",
+          "language": "portuguese",
+          "reference": "Giancarlo Fisichella lost control of his car and ended the race very soon after the start.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "and the race ended right after the start.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": "and the race ended right after the start.",
+          "chrf": 32.4
+        },
+        {
+          "id": "speech-pt_br-1987",
+          "category": "speech",
+          "expect": "caption",
+          "language": "portuguese",
+          "reference": "The crash occurred high up in mountainous terrain, and is believed to have been the result of hostile fire.",
+          "chunks": [
+            {
+              "text": "The accident occurred at high altitude.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "in the mountainous terrain, and it is believed that...",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "has been caused by enemy fire.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "The accident occurred at high altitude. in the mountainous terrain, and it is believed that... has been caused by enemy fire.",
+          "chrf": 51.87
+        },
+        {
+          "id": "speech-pl_pl-1692",
+          "category": "speech",
+          "expect": "caption",
+          "language": "polish",
+          "reference": "According to Japan's nuclear agency, radioactive caesium and iodine has been identified at the plant.",
+          "chunks": [
+            {
+              "text": "according to the Japanese nuclear agency.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "of the.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "according to the Japanese nuclear agency. of the.",
+          "chrf": 31.31
+        },
+        {
+          "id": "speech-pl_pl-1694",
+          "category": "speech",
+          "expect": "caption",
+          "language": "polish",
+          "reference": "Children are placed in Foster Care for a wide variety of reasons that range from neglect, to abuse, and even to extortion.",
+          "chunks": [
+            {
+              "text": "The children are placed in a replacement oven.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "is",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "violence and even forcing them.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "The children are placed in a replacement oven. is violence and even forcing them.",
+          "chrf": 30.75
+        },
+        {
+          "id": "speech-pl_pl-1860",
+          "category": "speech",
+          "expect": "caption",
+          "language": "polish",
+          "reference": "The governor's office said nineteen of the injured were police officers.",
+          "chunks": [
+            {
+              "text": "I agree with the statement of the Office of the Governor of Poland.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "among worn faces of our citizens.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "Thank you.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "I agree with the statement of the Office of the Governor of Poland. among worn faces of our citizens. Thank you.",
+          "chrf": 29.14
+        },
+        {
+          "id": "speech-pl_pl-1912",
+          "category": "speech",
+          "expect": "caption",
+          "language": "polish",
+          "reference": "Most of the smaller islands are independent nations, or associated with France, and known as luxury beach resorts.",
+          "chunks": [
+            {
+              "text": "Most of the smaller islands are really independent.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "rest areas.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "Most of the smaller islands are really independent. rest areas.",
+          "chrf": 41.16
+        },
+        {
+          "id": "speech-es_419-1764",
+          "category": "speech",
+          "expect": "caption",
+          "language": "spanish",
+          "reference": "The number of people present was so large that it was not possible for everybody to gain access to the funeral in St. Peter's Square.",
+          "chunks": [
+            {
+              "text": "That's all for this video. Thanks for watching.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "amount of people who concentrated, that not all of them could",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "were able to access the funeral in the Plaza de San Pedro.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": "That's all for this video. Thanks for watching. amount of people who concentrated, that not all of them could were able to access the funeral in the Plaza de San Pedro.",
+          "chrf": 31.58
+        },
+        {
+          "id": "speech-es_419-1770",
+          "category": "speech",
+          "expect": "caption",
+          "language": "spanish",
+          "reference": "This seems sensible, because the Earth doesn't feel as if it's moving, does it?",
+          "chunks": [
+            {
+              "text": "This seems to make sense.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "since you can't perceive its movement on Earth.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "¿Cierto?",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "This seems to make sense. since you can't perceive its movement on Earth. ¿Cierto?",
+          "chrf": 28.04
+        },
+        {
+          "id": "speech-es_419-1799",
+          "category": "speech",
+          "expect": "caption",
+          "language": "spanish",
+          "reference": "Beyond Wednesday's event, Carpanedo competed in two individual races at the Championships.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "He participated in two individual races of the championship.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "apart de la competencia del miércoles",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": "He participated in two individual races of the championship. apart de la competencia del miércoles",
+          "chrf": 48.96
+        },
+        {
+          "id": "speech-es_419-1820",
+          "category": "speech",
+          "expect": "caption",
+          "language": "spanish",
+          "reference": "People now write messages on computer screens, never having to come close to a sharpener.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "and write messages on the screens of your computers.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "they don't even need to get close to each other.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "Thank you.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "and write messages on the screens of your computers. they don't even need to get close to each other. Thank you.",
+          "chrf": 44.61
+        },
+        {
+          "id": "speech-tr_tr-1684",
+          "category": "speech",
+          "expect": "caption",
+          "language": "turkish",
+          "reference": "Apia is the capital of Samoa. The town is on the island of Upolu and has a population of just under 40,000.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "The city is on the island of Upola and is 40 kilometers from the city of Upola.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "It has a little less than 40,000 population.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": "The city is on the island of Upola and is 40 kilometers from the city of Upola. It has a little less than 40,000 population.",
+          "chrf": 44.42
+        },
+        {
+          "id": "speech-tr_tr-1692",
+          "category": "speech",
+          "expect": "caption",
+          "language": "turkish",
+          "reference": "According to Japan's nuclear agency, radioactive caesium and iodine has been identified at the plant.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "Active seizure and Iodine detected",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": "Active seizure and Iodine detected",
+          "chrf": 12.72
+        },
+        {
+          "id": "speech-tr_tr-1747",
+          "category": "speech",
+          "expect": "caption",
+          "language": "turkish",
+          "reference": "Fellow wrestlers also paid tribute to Luna.",
+          "chunks": [
+            {
+              "text": "Send my regards to your foughting friends on the Moon",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "they offered",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "Send my regards to your foughting friends on the Moon they offered",
+          "chrf": 11.97
+        },
+        {
+          "id": "speech-tr_tr-1884",
+          "category": "speech",
+          "expect": "caption",
+          "language": "turkish",
+          "reference": "In particular, it is claimed that one can detect whether a person is lying by interpreting micro-expressions correctly.",
+          "chunks": [
+            {
+              "text": "Especially when the micro-expressions are correct.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "In this way, a person has lied with the method of comment.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "It is assumed that what he did not say can be understood.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": "Especially when the micro-expressions are correct. In this way, a person has lied with the method of comment. It is assumed that what he did not say can be understood.",
+          "chrf": 39.17
+        },
+        {
+          "id": "speech-de_de-1683",
+          "category": "speech",
+          "expect": "caption",
+          "language": "german",
+          "reference": "There are still many men and women alive who survived their time here, and many more who had loved ones who were murdered or worked to death there, Jews and non-Jews alike.",
+          "chunks": [
+            {
+              "text": "There are still many men and women who spend their time here.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "and many others with relatives who were murdered there.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "or Jews and non-Jews who worked themselves to death.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "and not Jews in the same way.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "There are still many men and women who spend their time here. and many others with relatives who were murdered there. or Jews and non-Jews who worked themselves to death. and not Jews in the same way.",
+          "chrf": 62.01
+        },
+        {
+          "id": "speech-de_de-1738",
+          "category": "speech",
+          "expect": "caption",
+          "language": "german",
+          "reference": "It also attacked anything that entered the water; even a giant dinosaur such as T. rex would be no match for it.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "A big dinosaur like the T-Rex didn't grow up.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": "A big dinosaur like the T-Rex didn't grow up.",
+          "chrf": 13.08
+        },
+        {
+          "id": "speech-de_de-1739",
+          "category": "speech",
+          "expect": "caption",
+          "language": "german",
+          "reference": "Resting on the top of one of the mountains north of Mecca, the cave is completely isolated from the rest of the world.",
+          "chunks": [
+            {
+              "text": "The cave is located on the right side of the map.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "the top of one of the mountains north of Mecca.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "and is completely isolated from the rest of the world.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": "The cave is located on the right side of the map. the top of one of the mountains north of Mecca. and is completely isolated from the rest of the world.",
+          "chrf": 82.98
+        },
+        {
+          "id": "speech-de_de-1796",
+          "category": "speech",
+          "expect": "caption",
+          "language": "german",
+          "reference": "This sediment was necessary for creating sandbars and beaches, which served as wildlife habitats.",
+          "chunks": [
+            {
+              "text": "This sediment was necessary.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "to build sandbanks and sheds, which he called life.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "for wild animals.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "This sediment was necessary. to build sandbanks and sheds, which he called life. for wild animals.",
+          "chrf": 48.62
+        },
+        {
+          "id": "speech-uk_ua-1827",
+          "category": "speech",
+          "expect": "caption",
+          "language": "ukrainian",
+          "reference": "The crust is about 70 km thick on the near side and 100 km thick on the far side.",
+          "chunks": [
+            {
+              "text": "The monthly bark is about 70 kg.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "100 km in thickness on the far side.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": "The monthly bark is about 70 kg. 100 km in thickness on the far side.",
+          "chrf": 46.42
+        },
+        {
+          "id": "speech-uk_ua-1867",
+          "category": "speech",
+          "expect": "caption",
+          "language": "ukrainian",
+          "reference": "Plants make oxygen which humans breathe, and they take in carbon-dioxide which humans exhale (that is, breathe out).",
+          "chunks": [
+            {
+              "text": "Plants produce oxygen that people breathe.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "and the blood is taken out of the body, i.e. it is exhaled.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": "Plants produce oxygen that people breathe. and the blood is taken out of the body, i.e. it is exhaled.",
+          "chrf": 31.9
+        },
+        {
+          "id": "speech-uk_ua-1941",
+          "category": "speech",
+          "expect": "caption",
+          "language": "ukrainian",
+          "reference": "These couples may choose to make an adoption plan for their baby.",
+          "chunks": [
+            {
+              "text": "Such parents can decide to create",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "plan of adoption.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "Thank you.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "Such parents can decide to create plan of adoption. Thank you.",
+          "chrf": 26.02
+        },
+        {
+          "id": "speech-uk_ua-1982",
+          "category": "speech",
+          "expect": "caption",
+          "language": "ukrainian",
+          "reference": "Women: It is recommended that any women travellers say that they are married, regardless of actual marital status.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "that they are independent, independent from a real family relationship.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "It's done.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "that they are independent, independent from a real family relationship. It's done.",
+          "chrf": 22.07
+        },
+        {
+          "id": "speech-cmn_hans_cn-1805",
+          "category": "speech",
+          "expect": "caption",
+          "language": "chinese",
+          "reference": "Scotturb Bus 403 travels regularly to Sintra, stopping at Cabo da Roca.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "to go to Sintra on a regular basis.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "I'll see you next time.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "to go to Sintra on a regular basis. I'll see you next time.",
+          "chrf": 25.9
+        },
+        {
+          "id": "speech-cmn_hans_cn-1906",
+          "category": "speech",
+          "expect": "caption",
+          "language": "chinese",
+          "reference": "\"This is not going to be goodbye. This is the closing of one chapter and the opening of a new one.\"",
+          "chunks": [
+            {
+              "text": "这并不是告别 This is not a farewell",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "This is the end of a chapter.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "This is the beginning of a new chapter.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": "这并不是告别 This is not a farewell This is the end of a chapter. This is the beginning of a new chapter.",
+          "chrf": 41.22
+        },
+        {
+          "id": "speech-cmn_hans_cn-1965",
+          "category": "speech",
+          "expect": "caption",
+          "language": "chinese",
+          "reference": "They are almost all sandy beaches with safe swimming, and most have shade provided by pohutukawa trees.",
+          "chunks": [
+            {
+              "text": "这里几乎都是沙滩游泳很安静 It's almost a beach and it's very quiet here.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "Most places have the sound of Christmas trees in New Zealand.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            }
+          ],
+          "caption": "这里几乎都是沙滩游泳很安静 It's almost a beach and it's very quiet here. Most places have the sound of Christmas trees in New Zealand.",
+          "chrf": 27.02
+        },
+        {
+          "id": "speech-cmn_hans_cn-2006",
+          "category": "speech",
+          "expect": "caption",
+          "language": "chinese",
+          "reference": "Elements like calcium and potassium are considered metals. Of course, there are also metals like silver and gold.",
+          "chunks": [
+            {
+              "text": "盖甲等元素属于晶瑟的,盖甲等元素属于晶瑟的。",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "is being sued.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "盖甲等元素属于晶瑟的,盖甲等元素属于晶瑟的。 is being sued.",
+          "chrf": 2.8
+        },
+        {
+          "id": "english-1675",
+          "category": "english",
+          "expect": "caption",
+          "language": "english",
+          "reference": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+          "chunks": [
+            {
+              "text": "All nouns alongside the world say for",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "you always begin with a capital letter.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "Even in the middle of a sentence",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "All nouns alongside the world say for you always begin with a capital letter. Even in the middle of a sentence"
+        },
+        {
+          "id": "english-1728",
+          "category": "english",
+          "expect": "caption",
+          "language": "english",
+          "reference": "The cabbage juice changes color depending on how acidic or basic (alkaline) the chemical is.",
+          "chunks": [
+            {
+              "text": "The cabbage juice changes color depending on how acidic.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "alkaline the chemical is.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "The cabbage juice changes color depending on how acidic. alkaline the chemical is."
+        },
+        {
+          "id": "english-1806",
+          "category": "english",
+          "expect": "caption",
+          "language": "english",
+          "reference": "As light pollution in their heyday was not the kind of problem it is today, they are usually located in cities or at campuses, easier to reach than those built in modern times.",
+          "chunks": [
+            {
+              "text": "As light pollution in their heyday was not the kind of problem",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "is today, they are usually located in cities or at campuses.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "easier to reach than those built in modern times.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": "As light pollution in their heyday was not the kind of problem is today, they are usually located in cities or at campuses. easier to reach than those built in modern times."
+        },
+        {
+          "id": "english-1846",
+          "category": "english",
+          "expect": "caption",
+          "language": "english",
+          "reference": "The aspect ratio of this format (dividing by twelve to obtain the simplest whole-number ratio) is therefore said to be 3:2.",
+          "chunks": [
+            {
+              "text": "The Aspect Ratio of this format",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "dividing by 12 to obtain the simplest",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "whole number ratio is therefore said to be.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "Three to two.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "The Aspect Ratio of this format dividing by 12 to obtain the simplest whole number ratio is therefore said to be. Three to two."
+        },
+        {
+          "id": "english-1876",
+          "category": "english",
+          "expect": "caption",
+          "language": "english",
+          "reference": "The Northern Marianas emergency management office said that there were no damages reported in the nation.",
+          "chunks": [
+            {
+              "text": "The Northern Marianas Emergency",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "management office said that there were no damages.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "reported in the nation.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "Thank you.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "The Northern Marianas Emergency management office said that there were no damages. reported in the nation. Thank you."
+        },
+        {
+          "id": "english-1904",
+          "category": "english",
+          "expect": "caption",
+          "language": "english",
+          "reference": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+          "chunks": [
+            {
+              "text": "However, due to the slow communication",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "channels. Stiles in the West could...",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "lag behind by 25 to 30 years.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": ".",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "However, due to the slow communication channels. Stiles in the West could... lag behind by 25 to 30 years. ."
+        },
+        {
+          "id": "english-1914",
+          "category": "english",
+          "expect": "caption",
+          "language": "english",
+          "reference": "Twentieth century research has shown that there are two pools of genetic variation: hidden and expressed.",
+          "chunks": [
+            {
+              "text": "20th century research has shown that there...",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "are two pools of genetic variation hidden and expressed.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": ".",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "20th century research has shown that there... are two pools of genetic variation hidden and expressed. ."
+        },
+        {
+          "id": "english-1938",
+          "category": "english",
+          "expect": "caption",
+          "language": "english",
+          "reference": "The hospital has followed protocol for infection control, including separating the patient from others to prevent possible infection of others.",
+          "chunks": [
+            {
+              "text": "The hospital has followed protocol for infection.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "control including separating the patient",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "from others to prevent possible infections.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "of others.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "The hospital has followed protocol for infection. control including separating the patient from others to prevent possible infections. of others."
+        },
+        {
+          "id": "english-1950",
+          "category": "english",
+          "expect": "caption",
+          "language": "english",
+          "reference": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+          "chunks": [
+            {
+              "text": "To the north and within easy reach is the romantic and beautiful",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "fascinating town of Sintra and which was made famous",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "to foreigners after a glowing account of its split.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "recorded by Lord Byron.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "To the north and within easy reach is the romantic and beautiful fascinating town of Sintra and which was made famous to foreigners after a glowing account of its split. recorded by Lord Byron."
+        },
+        {
+          "id": "english-1972",
+          "category": "english",
+          "expect": "caption",
+          "language": "english",
+          "reference": "Many people don't think about them as dinosaurs because they have feathers and can fly.",
+          "chunks": [
+            {
+              "text": "Many people don't think about them as dinosaurs because they have feathers.",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": "and can fly.",
+              "reason": "caption",
+              "language": null
+            }
+          ],
+          "caption": "Many people don't think about them as dinosaurs because they have feathers. and can fly."
+        },
+        {
+          "id": "nonspeech-silence-3s",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-silence-6s",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-white-quiet",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": ".",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": ". .",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": ". . ."
+        },
+        {
+          "id": "nonspeech-white-loud",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-pink-quiet",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": ".",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": ".",
+              "reason": "caption",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": ". ."
+        },
+        {
+          "id": "nonspeech-pink-loud",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-hum-50hz",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-tone-1khz",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-clicks",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-bursts",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": null
+            }
+          ],
+          "caption": ""
+        }
+      ]
+    },
+    "whisper1-skip-en": {
+      "summary": {
+        "clips": 52,
+        "false_caption_rate": 0.0,
+        "false_caption_by_category": {
+          "english": 0.0,
+          "nonspeech": 0.0
+        },
+        "missed_caption_rate": 0.0,
+        "chrf": 39.73,
+        "language_accuracy": 0.9762,
+        "latency_p50": null,
+        "latency_p95": null,
+        "latency_samples": 0,
+        "errors": 0
+      },
+      "clips": [
+        {
+          "id": "speech-ru_ru-1704",
+          "category": "speech",
+          "expect": "caption",
+          "language": "russian",
+          "reference": "In 1990, it was added to the list of world heritage sites in danger, due to the threat of desert sands.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "russian"
+            },
+            {
+              "text": "is added to the list of the world heritage sites.",
+              "reason": "caption",
+              "language": "russian"
+            },
+            {
+              "text": "under threat of danger from the side of the sand in the desert.",
+              "reason": "caption",
+              "language": "ukrainian"
+            },
+            {
+              "text": "Thank you for your attention.",
+              "reason": "caption",
+              "language": "russian"
+            }
+          ],
+          "caption": "is added to the list of the world heritage sites. under threat of danger from the side of the sand in the desert. Thank you for your attention.",
+          "chrf": 55.95,
+          "detected_language": "russian"
+        },
+        {
+          "id": "speech-ru_ru-1781",
+          "category": "speech",
+          "expect": "caption",
+          "language": "russian",
+          "reference": "Madagascar is by far the biggest, and a continent on its own when it comes to wildlife.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": "Scar is much larger than the others and is a self-proclaimed",
+              "reason": "caption",
+              "language": "russian"
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "russian"
+            },
+            {
+              "text": "wonder!",
+              "reason": "caption",
+              "language": "russian"
+            }
+          ],
+          "caption": "Scar is much larger than the others and is a self-proclaimed wonder!",
+          "chrf": 17.0,
+          "detected_language": "russian"
+        },
+        {
+          "id": "speech-ru_ru-1917",
+          "category": "speech",
+          "expect": "caption",
+          "language": "russian",
+          "reference": "Several large television screens were installed in various places in Rome to let the people watch the ceremony.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "russian"
+            },
+            {
+              "text": "large television screens with the help of which people could",
+              "reason": "caption",
+              "language": "russian"
+            },
+            {
+              "text": "to watch the ceremony.",
+              "reason": "caption",
+              "language": "russian"
+            }
+          ],
+          "caption": "large television screens with the help of which people could to watch the ceremony.",
+          "chrf": 48.43,
+          "detected_language": "russian"
+        },
+        {
+          "id": "speech-ru_ru-1926",
+          "category": "speech",
+          "expect": "caption",
+          "language": "russian",
+          "reference": "Accepted were Aristotle's views on all matters of science, including psychology.",
+          "chunks": [
+            {
+              "text": "Thank you for watching!",
+              "reason": "caption",
+              "language": "russian"
+            },
+            {
+              "text": "questions, including psychology, were accepted.",
+              "reason": "caption",
+              "language": "russian"
+            },
+            {
+              "text": "and the look of Aristotle.",
+              "reason": "caption",
+              "language": "russian"
+            }
+          ],
+          "caption": "Thank you for watching! questions, including psychology, were accepted. and the look of Aristotle.",
+          "chrf": 47.85,
+          "detected_language": "russian"
+        },
+        {
+          "id": "speech-pt_br-1660",
+          "category": "speech",
+          "expect": "caption",
+          "language": "portuguese",
+          "reference": "Romanticism had a large element of cultural determinism, drawn from writers such as Goethe, Fichte, and Schlegel.",
+          "chunks": [
+            {
+              "text": "Romanticism had a great element of determinism.",
+              "reason": "caption",
+              "language": "portuguese"
+            },
+            {
+              "text": "and cultural feminism, extracted from writers such as...",
+              "reason": "caption",
+              "language": "portuguese"
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "I'll take care of you.",
+              "reason": "caption",
+              "language": "portuguese"
+            }
+          ],
+          "caption": "Romanticism had a great element of determinism. and cultural feminism, extracted from writers such as... I'll take care of you.",
+          "chrf": 55.24,
+          "detected_language": "portuguese"
+        },
+        {
+          "id": "speech-pt_br-1696",
+          "category": "speech",
+          "expect": "caption",
+          "language": "portuguese",
+          "reference": "The two compounds react with one another to form crystals that may block kidney function, researchers at the university said.",
+          "chunks": [
+            {
+              "text": "The two compounds react with each other.",
+              "reason": "caption",
+              "language": "portuguese"
+            },
+            {
+              "text": "to form crystals that can block the flow of water.",
+              "reason": "caption",
+              "language": "portuguese"
+            },
+            {
+              "text": "kidney function, said researchers.",
+              "reason": "caption",
+              "language": "portuguese"
+            },
+            {
+              "text": "of the University.",
+              "reason": "caption",
+              "language": "portuguese"
+            }
+          ],
+          "caption": "The two compounds react with each other. to form crystals that can block the flow of water. kidney function, said researchers. of the University.",
+          "chrf": 69.27,
+          "detected_language": "portuguese"
+        },
+        {
+          "id": "speech-pt_br-1853",
+          "category": "speech",
+          "expect": "caption",
+          "language": "portuguese",
+          "reference": "Giancarlo Fisichella lost control of his car and ended the race very soon after the start.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "romanian"
+            },
+            {
+              "text": "and the race ended right after the start.",
+              "reason": "caption",
+              "language": "portuguese"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": "and the race ended right after the start.",
+          "chrf": 32.4,
+          "detected_language": "portuguese"
+        },
+        {
+          "id": "speech-pt_br-1987",
+          "category": "speech",
+          "expect": "caption",
+          "language": "portuguese",
+          "reference": "The crash occurred high up in mountainous terrain, and is believed to have been the result of hostile fire.",
+          "chunks": [
+            {
+              "text": "The accident occurred at high altitude.",
+              "reason": "caption",
+              "language": "portuguese"
+            },
+            {
+              "text": "in the mountainous terrain, and it is believed that...",
+              "reason": "caption",
+              "language": "portuguese"
+            },
+            {
+              "text": "has been caused by enemy fire.",
+              "reason": "caption",
+              "language": "portuguese"
+            }
+          ],
+          "caption": "The accident occurred at high altitude. in the mountainous terrain, and it is believed that... has been caused by enemy fire.",
+          "chrf": 51.87,
+          "detected_language": "portuguese"
+        },
+        {
+          "id": "speech-pl_pl-1692",
+          "category": "speech",
+          "expect": "caption",
+          "language": "polish",
+          "reference": "According to Japan's nuclear agency, radioactive caesium and iodine has been identified at the plant.",
+          "chunks": [
+            {
+              "text": "according to the Japanese nuclear agency.",
+              "reason": "caption",
+              "language": "polish"
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "polish"
+            },
+            {
+              "text": "of the.",
+              "reason": "caption",
+              "language": "polish"
+            }
+          ],
+          "caption": "according to the Japanese nuclear agency. of the.",
+          "chrf": 31.31,
+          "detected_language": "polish"
+        },
+        {
+          "id": "speech-pl_pl-1694",
+          "category": "speech",
+          "expect": "caption",
+          "language": "polish",
+          "reference": "Children are placed in Foster Care for a wide variety of reasons that range from neglect, to abuse, and even to extortion.",
+          "chunks": [
+            {
+              "text": "The children are placed in a replacement oven.",
+              "reason": "caption",
+              "language": "polish"
+            },
+            {
+              "text": "is",
+              "reason": "caption",
+              "language": "polish"
+            },
+            {
+              "text": "violence and even forcing them.",
+              "reason": "caption",
+              "language": "polish"
+            }
+          ],
+          "caption": "The children are placed in a replacement oven. is violence and even forcing them.",
+          "chrf": 30.75,
+          "detected_language": "polish"
+        },
+        {
+          "id": "speech-pl_pl-1860",
+          "category": "speech",
+          "expect": "caption",
+          "language": "polish",
+          "reference": "The governor's office said nineteen of the injured were police officers.",
+          "chunks": [
+            {
+              "text": "I agree with the statement of the Office of the Governor of Poland.",
+              "reason": "caption",
+              "language": "polish"
+            },
+            {
+              "text": "among worn faces of our citizens.",
+              "reason": "caption",
+              "language": "russian"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            }
+          ],
+          "caption": "I agree with the statement of the Office of the Governor of Poland. among worn faces of our citizens.",
+          "chrf": 29.44,
+          "detected_language": "polish"
+        },
+        {
+          "id": "speech-pl_pl-1912",
+          "category": "speech",
+          "expect": "caption",
+          "language": "polish",
+          "reference": "Most of the smaller islands are independent nations, or associated with France, and known as luxury beach resorts.",
+          "chunks": [
+            {
+              "text": "Most of the smaller islands are really independent.",
+              "reason": "caption",
+              "language": "polish"
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "polish"
+            },
+            {
+              "text": "rest areas.",
+              "reason": "caption",
+              "language": "polish"
+            }
+          ],
+          "caption": "Most of the smaller islands are really independent. rest areas.",
+          "chrf": 41.16,
+          "detected_language": "polish"
+        },
+        {
+          "id": "speech-es_419-1764",
+          "category": "speech",
+          "expect": "caption",
+          "language": "spanish",
+          "reference": "The number of people present was so large that it was not possible for everybody to gain access to the funeral in St. Peter's Square.",
+          "chunks": [
+            {
+              "text": "That's all for this video. Thanks for watching.",
+              "reason": "caption",
+              "language": "spanish"
+            },
+            {
+              "text": "amount of people who concentrated, that not all of them could",
+              "reason": "caption",
+              "language": "spanish"
+            },
+            {
+              "text": "were able to access the funeral in the Plaza de San Pedro.",
+              "reason": "caption",
+              "language": "spanish"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": "That's all for this video. Thanks for watching. amount of people who concentrated, that not all of them could were able to access the funeral in the Plaza de San Pedro.",
+          "chrf": 31.58,
+          "detected_language": "spanish"
+        },
+        {
+          "id": "speech-es_419-1770",
+          "category": "speech",
+          "expect": "caption",
+          "language": "spanish",
+          "reference": "This seems sensible, because the Earth doesn't feel as if it's moving, does it?",
+          "chunks": [
+            {
+              "text": "This seems to make sense.",
+              "reason": "caption",
+              "language": "spanish"
+            },
+            {
+              "text": "since you can't perceive its movement on Earth.",
+              "reason": "caption",
+              "language": "spanish"
+            },
+            {
+              "text": "¿Cierto?",
+              "reason": "caption",
+              "language": "spanish"
+            }
+          ],
+          "caption": "This seems to make sense. since you can't perceive its movement on Earth. ¿Cierto?",
+          "chrf": 28.04,
+          "detected_language": "spanish"
+        },
+        {
+          "id": "speech-es_419-1799",
+          "category": "speech",
+          "expect": "caption",
+          "language": "spanish",
+          "reference": "Beyond Wednesday's event, Carpanedo competed in two individual races at the Championships.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            },
+            {
+              "text": "He participated in two individual races of the championship.",
+              "reason": "caption",
+              "language": "spanish"
+            },
+            {
+              "text": "apart de la competencia del miércoles",
+              "reason": "caption",
+              "language": "spanish"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": "He participated in two individual races of the championship. apart de la competencia del miércoles",
+          "chrf": 48.96,
+          "detected_language": "spanish"
+        },
+        {
+          "id": "speech-es_419-1820",
+          "category": "speech",
+          "expect": "caption",
+          "language": "spanish",
+          "reference": "People now write messages on computer screens, never having to come close to a sharpener.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "spanish"
+            },
+            {
+              "text": "and write messages on the screens of your computers.",
+              "reason": "caption",
+              "language": "spanish"
+            },
+            {
+              "text": "they don't even need to get close to each other.",
+              "reason": "caption",
+              "language": "spanish"
+            },
+            {
+              "text": "Thank you.",
+              "reason": "caption",
+              "language": "korean"
+            }
+          ],
+          "caption": "and write messages on the screens of your computers. they don't even need to get close to each other. Thank you.",
+          "chrf": 44.61,
+          "detected_language": "spanish"
+        },
+        {
+          "id": "speech-tr_tr-1684",
+          "category": "speech",
+          "expect": "caption",
+          "language": "turkish",
+          "reference": "Apia is the capital of Samoa. The town is on the island of Upolu and has a population of just under 40,000.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "turkish"
+            },
+            {
+              "text": "The city is on the island of Upola and is 40 kilometers from the city of Upola.",
+              "reason": "caption",
+              "language": "turkish"
+            },
+            {
+              "text": "It has a little less than 40,000 population.",
+              "reason": "caption",
+              "language": "turkish"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": "The city is on the island of Upola and is 40 kilometers from the city of Upola. It has a little less than 40,000 population.",
+          "chrf": 44.42,
+          "detected_language": "turkish"
+        },
+        {
+          "id": "speech-tr_tr-1692",
+          "category": "speech",
+          "expect": "caption",
+          "language": "turkish",
+          "reference": "According to Japan's nuclear agency, radioactive caesium and iodine has been identified at the plant.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "turkish"
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "turkish"
+            },
+            {
+              "text": "Active seizure and Iodine detected",
+              "reason": "caption",
+              "language": "turkish"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": "Active seizure and Iodine detected",
+          "chrf": 12.72,
+          "detected_language": "turkish"
+        },
+        {
+          "id": "speech-tr_tr-1747",
+          "category": "speech",
+          "expect": "caption",
+          "language": "turkish",
+          "reference": "Fellow wrestlers also paid tribute to Luna.",
+          "chunks": [
+            {
+              "text": "Send my regards to your foughting friends on the Moon",
+              "reason": "caption",
+              "language": "turkish"
+            },
+            {
+              "text": "they offered",
+              "reason": "caption",
+              "language": "turkish"
+            }
+          ],
+          "caption": "Send my regards to your foughting friends on the Moon they offered",
+          "chrf": 11.97,
+          "detected_language": "turkish"
+        },
+        {
+          "id": "speech-tr_tr-1884",
+          "category": "speech",
+          "expect": "caption",
+          "language": "turkish",
+          "reference": "In particular, it is claimed that one can detect whether a person is lying by interpreting micro-expressions correctly.",
+          "chunks": [
+            {
+              "text": "Especially when the micro-expressions are correct.",
+              "reason": "caption",
+              "language": "turkish"
+            },
+            {
+              "text": "In this way, a person has lied with the method of comment.",
+              "reason": "caption",
+              "language": "turkish"
+            },
+            {
+              "text": "It is assumed that what he did not say can be understood.",
+              "reason": "caption",
+              "language": "turkish"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": "Especially when the micro-expressions are correct. In this way, a person has lied with the method of comment. It is assumed that what he did not say can be understood.",
+          "chrf": 39.17,
+          "detected_language": "turkish"
+        },
+        {
+          "id": "speech-de_de-1683",
+          "category": "speech",
+          "expect": "caption",
+          "language": "german",
+          "reference": "There are still many men and women alive who survived their time here, and many more who had loved ones who were murdered or worked to death there, Jews and non-Jews alike.",
+          "chunks": [
+            {
+              "text": "There are still many men and women who spend their time here.",
+              "reason": "caption",
+              "language": "german"
+            },
+            {
+              "text": "and many others with relatives who were murdered there.",
+              "reason": "caption",
+              "language": "german"
+            },
+            {
+              "text": "or Jews and non-Jews who worked themselves to death.",
+              "reason": "caption",
+              "language": "german"
+            },
+            {
+              "text": "and not Jews in the same way.",
+              "reason": "caption",
+              "language": "german"
+            }
+          ],
+          "caption": "There are still many men and women who spend their time here. and many others with relatives who were murdered there. or Jews and non-Jews who worked themselves to death. and not Jews in the same way.",
+          "chrf": 62.01,
+          "detected_language": "german"
+        },
+        {
+          "id": "speech-de_de-1738",
+          "category": "speech",
+          "expect": "caption",
+          "language": "german",
+          "reference": "It also attacked anything that entered the water; even a giant dinosaur such as T. rex would be no match for it.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "german"
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "german"
+            },
+            {
+              "text": "A big dinosaur like the T-Rex didn't grow up.",
+              "reason": "caption",
+              "language": "german"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": "A big dinosaur like the T-Rex didn't grow up.",
+          "chrf": 13.08,
+          "detected_language": "german"
+        },
+        {
+          "id": "speech-de_de-1739",
+          "category": "speech",
+          "expect": "caption",
+          "language": "german",
+          "reference": "Resting on the top of one of the mountains north of Mecca, the cave is completely isolated from the rest of the world.",
+          "chunks": [
+            {
+              "text": "The cave is located on the right side of the map.",
+              "reason": "caption",
+              "language": "german"
+            },
+            {
+              "text": "the top of one of the mountains north of Mecca.",
+              "reason": "caption",
+              "language": "german"
+            },
+            {
+              "text": "and is completely isolated from the rest of the world.",
+              "reason": "caption",
+              "language": "german"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": "The cave is located on the right side of the map. the top of one of the mountains north of Mecca. and is completely isolated from the rest of the world.",
+          "chrf": 82.98,
+          "detected_language": "german"
+        },
+        {
+          "id": "speech-de_de-1796",
+          "category": "speech",
+          "expect": "caption",
+          "language": "german",
+          "reference": "This sediment was necessary for creating sandbars and beaches, which served as wildlife habitats.",
+          "chunks": [
+            {
+              "text": "This sediment was necessary.",
+              "reason": "caption",
+              "language": "german"
+            },
+            {
+              "text": "to build sandbanks and sheds, which he called life.",
+              "reason": "caption",
+              "language": "german"
+            },
+            {
+              "text": "for wild animals.",
+              "reason": "caption",
+              "language": "german"
+            }
+          ],
+          "caption": "This sediment was necessary. to build sandbanks and sheds, which he called life. for wild animals.",
+          "chrf": 48.62,
+          "detected_language": "german"
+        },
+        {
+          "id": "speech-uk_ua-1827",
+          "category": "speech",
+          "expect": "caption",
+          "language": "ukrainian",
+          "reference": "The crust is about 70 km thick on the near side and 100 km thick on the far side.",
+          "chunks": [
+            {
+              "text": "The monthly bark is about 70 kg.",
+              "reason": "caption",
+              "language": "russian"
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "russian"
+            },
+            {
+              "text": "100 km in thickness on the far side.",
+              "reason": "caption",
+              "language": "russian"
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": null
+            }
+          ],
+          "caption": "The monthly bark is about 70 kg. 100 km in thickness on the far side.",
+          "chrf": 46.42,
+          "detected_language": "russian"
+        },
+        {
+          "id": "speech-uk_ua-1867",
+          "category": "speech",
+          "expect": "caption",
+          "language": "ukrainian",
+          "reference": "Plants make oxygen which humans breathe, and they take in carbon-dioxide which humans exhale (that is, breathe out).",
+          "chunks": [
+            {
+              "text": "Plants produce oxygen that people breathe.",
+              "reason": "caption",
+              "language": "ukrainian"
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "ukrainian"
+            },
+            {
+              "text": "and the blood is taken out of the body, i.e. it is exhaled.",
+              "reason": "caption",
+              "language": "ukrainian"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": "Plants produce oxygen that people breathe. and the blood is taken out of the body, i.e. it is exhaled.",
+          "chrf": 31.9,
+          "detected_language": "ukrainian"
+        },
+        {
+          "id": "speech-uk_ua-1941",
+          "category": "speech",
+          "expect": "caption",
+          "language": "ukrainian",
+          "reference": "These couples may choose to make an adoption plan for their baby.",
+          "chunks": [
+            {
+              "text": "Such parents can decide to create",
+              "reason": "caption",
+              "language": "ukrainian"
+            },
+            {
+              "text": "plan of adoption.",
+              "reason": "caption",
+              "language": "ukrainian"
+            },
+            {
+              "text": "Thank you.",
+              "reason": "caption",
+              "language": "korean"
+            }
+          ],
+          "caption": "Such parents can decide to create plan of adoption. Thank you.",
+          "chrf": 26.02,
+          "detected_language": "ukrainian"
+        },
+        {
+          "id": "speech-uk_ua-1982",
+          "category": "speech",
+          "expect": "caption",
+          "language": "ukrainian",
+          "reference": "Women: It is recommended that any women travellers say that they are married, regardless of actual marital status.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "ukrainian"
+            },
+            {
+              "text": "that they are independent, independent from a real family relationship.",
+              "reason": "caption",
+              "language": "ukrainian"
+            },
+            {
+              "text": "It's done.",
+              "reason": "caption",
+              "language": "russian"
+            }
+          ],
+          "caption": "that they are independent, independent from a real family relationship. It's done.",
+          "chrf": 22.07,
+          "detected_language": "ukrainian"
+        },
+        {
+          "id": "speech-cmn_hans_cn-1805",
+          "category": "speech",
+          "expect": "caption",
+          "language": "chinese",
+          "reference": "Scotturb Bus 403 travels regularly to Sintra, stopping at Cabo da Roca.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "chinese"
+            },
+            {
+              "text": "to go to Sintra on a regular basis.",
+              "reason": "caption",
+              "language": "chinese"
+            },
+            {
+              "text": "I'll see you next time.",
+              "reason": "caption",
+              "language": "chinese"
+            }
+          ],
+          "caption": "to go to Sintra on a regular basis. I'll see you next time.",
+          "chrf": 25.9,
+          "detected_language": "chinese"
+        },
+        {
+          "id": "speech-cmn_hans_cn-1906",
+          "category": "speech",
+          "expect": "caption",
+          "language": "chinese",
+          "reference": "\"This is not going to be goodbye. This is the closing of one chapter and the opening of a new one.\"",
+          "chunks": [
+            {
+              "text": "这并不是告别 This is not a farewell",
+              "reason": "caption",
+              "language": "chinese"
+            },
+            {
+              "text": "This is the end of a chapter.",
+              "reason": "caption",
+              "language": "chinese"
+            },
+            {
+              "text": "This is the beginning of a new chapter.",
+              "reason": "caption",
+              "language": "chinese"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": "这并不是告别 This is not a farewell This is the end of a chapter. This is the beginning of a new chapter.",
+          "chrf": 41.22,
+          "detected_language": "chinese"
+        },
+        {
+          "id": "speech-cmn_hans_cn-1965",
+          "category": "speech",
+          "expect": "caption",
+          "language": "chinese",
+          "reference": "They are almost all sandy beaches with safe swimming, and most have shade provided by pohutukawa trees.",
+          "chunks": [
+            {
+              "text": "这里几乎都是沙滩游泳很安静 It's almost a beach and it's very quiet here.",
+              "reason": "caption",
+              "language": "chinese"
+            },
+            {
+              "text": "Most places have the sound of Christmas trees in New Zealand.",
+              "reason": "caption",
+              "language": "chinese"
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "korean"
+            }
+          ],
+          "caption": "这里几乎都是沙滩游泳很安静 It's almost a beach and it's very quiet here. Most places have the sound of Christmas trees in New Zealand.",
+          "chrf": 27.02,
+          "detected_language": "chinese"
+        },
+        {
+          "id": "speech-cmn_hans_cn-2006",
+          "category": "speech",
+          "expect": "caption",
+          "language": "chinese",
+          "reference": "Elements like calcium and potassium are considered metals. Of course, there are also metals like silver and gold.",
+          "chunks": [
+            {
+              "text": "盖甲等元素属于晶瑟的,盖甲等元素属于晶瑟的。",
+              "reason": "caption",
+              "language": "chinese"
+            },
+            {
+              "text": null,
+              "reason": "empty",
+              "language": "chinese"
+            },
+            {
+              "text": "is being sued.",
+              "reason": "caption",
+              "language": "chinese"
+            }
+          ],
+          "caption": "盖甲等元素属于晶瑟的,盖甲等元素属于晶瑟的。 is being sued.",
+          "chrf": 2.8,
+          "detected_language": "chinese"
+        },
+        {
+          "id": "english-1675",
+          "category": "english",
+          "expect": "suppress",
+          "language": "english",
+          "reference": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            }
+          ],
+          "caption": "",
+          "detected_language": "english"
+        },
+        {
+          "id": "english-1728",
+          "category": "english",
+          "expect": "suppress",
+          "language": "english",
+          "reference": "The cabbage juice changes color depending on how acidic or basic (alkaline) the chemical is.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            }
+          ],
+          "caption": "",
+          "detected_language": "english"
+        },
+        {
+          "id": "english-1806",
+          "category": "english",
+          "expect": "suppress",
+          "language": "english",
+          "reference": "As light pollution in their heyday was not the kind of problem it is today, they are usually located in cities or at campuses, easier to reach than those built in modern times.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": "",
+          "detected_language": "english"
+        },
+        {
+          "id": "english-1846",
+          "category": "english",
+          "expect": "suppress",
+          "language": "english",
+          "reference": "The aspect ratio of this format (dividing by twelve to obtain the simplest whole-number ratio) is therefore said to be 3:2.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            }
+          ],
+          "caption": "",
+          "detected_language": "english"
+        },
+        {
+          "id": "english-1876",
+          "category": "english",
+          "expect": "suppress",
+          "language": "english",
+          "reference": "The Northern Marianas emergency management office said that there were no damages reported in the nation.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            }
+          ],
+          "caption": "",
+          "detected_language": "english"
+        },
+        {
+          "id": "english-1904",
+          "category": "english",
+          "expect": "suppress",
+          "language": "english",
+          "reference": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            }
+          ],
+          "caption": "",
+          "detected_language": "english"
+        },
+        {
+          "id": "english-1914",
+          "category": "english",
+          "expect": "suppress",
+          "language": "english",
+          "reference": "Twentieth century research has shown that there are two pools of genetic variation: hidden and expressed.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            }
+          ],
+          "caption": "",
+          "detected_language": "english"
+        },
+        {
+          "id": "english-1938",
+          "category": "english",
+          "expect": "suppress",
+          "language": "english",
+          "reference": "The hospital has followed protocol for infection control, including separating the patient from others to prevent possible infection of others.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            }
+          ],
+          "caption": "",
+          "detected_language": "english"
+        },
+        {
+          "id": "english-1950",
+          "category": "english",
+          "expect": "suppress",
+          "language": "english",
+          "reference": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            }
+          ],
+          "caption": "",
+          "detected_language": "english"
+        },
+        {
+          "id": "english-1972",
+          "category": "english",
+          "expect": "suppress",
+          "language": "english",
+          "reference": "Many people don't think about them as dinosaurs because they have feathers and can fly.",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            }
+          ],
+          "caption": "",
+          "detected_language": "english"
+        },
+        {
+          "id": "nonspeech-silence-3s",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-silence-6s",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-white-quiet",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-white-loud",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "nynorsk"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-pink-quiet",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "english",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-pink-loud",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "nynorsk"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "nynorsk"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-hum-50hz",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-tone-1khz",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-clicks",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": ""
+        },
+        {
+          "id": "nonspeech-bursts",
+          "category": "nonspeech",
+          "expect": "suppress",
+          "language": null,
+          "reference": "",
+          "chunks": [
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            },
+            {
+              "text": null,
+              "reason": "hallucination",
+              "language": "english"
+            }
+          ],
+          "caption": ""
+        }
+      ]
+    }
+  },
+  "live_calls": 0,
+  "cached_calls": 444,
+  "billed_seconds": 0.0,
+  "cost_usd": 0.0
+}

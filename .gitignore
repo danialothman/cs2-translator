@@ -185,3 +185,7 @@ settings.json
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+# Evals
+evals/.cache/
+evals/results/
+evals/clips/private/

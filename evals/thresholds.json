@@ -1,0 +1,6 @@
+{
+  "false_caption_rate": 0.05,
+  "missed_caption_rate": 0.05,
+  "chrf": 3.0,
+  "language_accuracy": 0.05
+}
