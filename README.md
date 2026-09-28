@@ -2,6 +2,8 @@
 
 Real-time voice translation overlay for CS2 (Counter-Strike 2) that translates foreign-language teammates to English using the OpenAI Whisper API.
 
+![Translation overlay showing an English caption during a CS2 round](docs/gameplay.jpg)
+
 ## Features
 
 - **Non-intrusive overlay** — transparent, draggable window that sits on top of CS2
