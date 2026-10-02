@@ -1,7 +1,10 @@
-# Only for evals/demo_voice.py (CS2 demo voice extraction). The live eval does not need these.
+# Only for the real-match clip tools, evals/demo_voice.py and evals/record_loopback.py.
+# The live eval does not need these.
 demoparser2>=0.40
 av>=12
 zstandard>=0.22
+# record_loopback.py: streaming resampler
+soxr>=0.3
 # For --lang. ctranslate2 still imports pkg_resources, which setuptools 81 removed.
 faster-whisper>=1.0
 setuptools<81
