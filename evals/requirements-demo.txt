@@ -1,0 +1,7 @@
+# Only for evals/demo_voice.py (CS2 demo voice extraction). The live eval does not need these.
+demoparser2>=0.40
+av>=12
+zstandard>=0.22
+# For --lang. ctranslate2 still imports pkg_resources, which setuptools 81 removed.
+faster-whisper>=1.0
+setuptools<81
