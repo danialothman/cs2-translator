@@ -63,6 +63,19 @@ It writes each player's voice on the match timeline, a mix of all players, `segm
 
 Demo voice has no game audio under it. It tests the codec and real speech, not noise robustness.
 
+### Recording a match
+
+`record_loopback.py` records what the PC plays through WASAPI loopback, the same capture the app uses, to 48 kHz stereo FLAC in `clips/private/recordings/`:
+
+```bash
+pythonw -m evals.record_loopback                    # window with Start / Stop
+python -m evals.record_loopback --cli --minutes 60  # terminal
+```
+
+It records every app's sound, so pause browsers and chat apps first. Your microphone is not included. Loopback delivers nothing while nothing plays, so silent stretches are dropped and timestamps run ahead of the match clock.
+
+Much of the English in a match is the game's own radio voice ("Roger that", "Need help"), not players. Label both: Skip English must drop either.
+
 ## Metrics
 
 - **false_caption_rate**: share of `suppress` clips that produced any caption (hallucinations, English that leaked through).
