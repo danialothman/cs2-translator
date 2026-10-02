@@ -25,6 +25,9 @@ class TranslationOverlay:
 
         # Window setup
         self.root.title("CS2 Translation Overlay")
+        # No title bar: the window is moved by dragging anywhere on it and
+        # resized from the corner grip, and it closes with the session.
+        self.root.overrideredirect(True)
         self.root.attributes("-topmost", True)
         self.root.attributes("-alpha", alpha)
         self.root.configure(bg=bg_color)
@@ -49,7 +52,18 @@ class TranslationOverlay:
             highlightthickness=0,
         )
         self.text_widget.pack(expand=True, fill=tk.BOTH)
-        self.text_widget.config(state=tk.DISABLED, cursor="")
+        self.text_widget.config(state=tk.DISABLED, cursor="fleur")
+        # Drop the Text class bindings so a drag moves the window instead of
+        # selecting caption text.
+        self.text_widget.bindtags((self.text_widget, self.root, "all"))
+
+        grip = tk.Label(
+            self.root, text="◢", font=(font_family, 9),
+            bg=bg_color, fg="#555555", cursor="size_nw_se",
+        )
+        grip.place(relx=1.0, rely=1.0, anchor="se")
+        grip.bind("<Button-1>", self._start_resize)
+        grip.bind("<B1-Motion>", self._on_resize)
 
         self.text_widget.tag_configure("timestamp", foreground=timestamp_color)
         self.text_widget.tag_configure("text", foreground=text_color)
@@ -73,17 +87,32 @@ class TranslationOverlay:
         self.text_widget.config(state=tk.NORMAL)
         self.text_widget.insert(tk.END, "CS2 Translation Overlay Ready\n", "text")
         self.text_widget.insert(tk.END, "Waiting for voice chat...\n", "text")
-        self.text_widget.insert(tk.END, "Drag this window to reposition", "text")
+        self.text_widget.insert(tk.END, "Drag to move, drag the corner to resize", "text")
         self.text_widget.config(state=tk.DISABLED)
 
     def _start_move(self, event):
-        self._drag_data["x"] = event.x
-        self._drag_data["y"] = event.y
+        # Screen coordinates: event.x is relative to whichever child was clicked.
+        self._drag_data["x"] = event.x_root - self.root.winfo_x()
+        self._drag_data["y"] = event.y_root - self.root.winfo_y()
 
     def _on_move(self, event):
-        x = self.root.winfo_x() + (event.x - self._drag_data["x"])
-        y = self.root.winfo_y() + (event.y - self._drag_data["y"])
+        x = event.x_root - self._drag_data["x"]
+        y = event.y_root - self._drag_data["y"]
         self.root.geometry(f"+{x}+{y}")
+
+    def _start_resize(self, event):
+        self._resize_data = (
+            event.x_root, event.y_root,
+            self.root.winfo_width(), self.root.winfo_height(),
+        )
+        return "break"  # keep the window's move binding from firing too
+
+    def _on_resize(self, event):
+        x0, y0, w0, h0 = self._resize_data
+        w = max(200, w0 + event.x_root - x0)
+        h = max(60, h0 + event.y_root - y0)
+        self.root.geometry(f"{w}x{h}")
+        return "break"
 
     def add_caption(self, text: str):
         """Add a new caption to the display (must be called from main thread)."""
