@@ -48,6 +48,21 @@ FLEURS is by Google, licensed [CC BY 4.0](https://creativecommons.org/licenses/b
 
 Recordings from real matches contain other players' voices. Put them in `clips/private/` with their own `manifest.jsonl` (same fields, `file` relative to that folder). The folder is gitignored and only the `full` set loads it. Never commit these clips.
 
+### Voice from CS2 demos
+
+A CS2 demo stores team voice chat as Opus packets when the server records voice. Some FACEIT servers do; Valve matchmaking demos have none. `demo_voice.py` extracts it per player, so you can cut real voice-chat clips without recording a match yourself:
+
+```bash
+pip install -r evals/requirements-demo.txt
+python -m evals.demo_voice evals/clips/private/demos/<match>.dem.zst --lang
+```
+
+It writes each player's voice on the match timeline, a mix of all players, `segments.tsv` (one row per burst of speech) and `listen-longest.wav` (the longest bursts back to back) to `clips/private/demos/<match>/`. A `.dem.zst` is unpacked to a temporary file that is deleted afterwards.
+
+`--lang` runs Whisper language detection on each player's longest bursts, offline on the CPU. Use it to find players worth cutting clips from, then listen: short, noisy callouts fool it, and it can name a language from a hallucinated transcript.
+
+Demo voice has no game audio under it. It tests the codec and real speech, not noise robustness.
+
 ## Metrics
 
 - **false_caption_rate**: share of `suppress` clips that produced any caption (hallucinations, English that leaked through).
