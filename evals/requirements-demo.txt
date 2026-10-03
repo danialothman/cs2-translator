@@ -1,10 +1,13 @@
-# Only for the real-match clip tools, evals/demo_voice.py and evals/record_loopback.py.
+# Only for the real-match clip tools: demo_voice.py, record_loopback.py,
+# draft_transcript.py and review_server.py in evals/.
 # The live eval does not need these.
 demoparser2>=0.40
 av>=12
 zstandard>=0.22
-# record_loopback.py: streaming resampler
+# record_loopback.py and draft_transcript.py: resampling
 soxr>=0.3
 # For --lang. ctranslate2 still imports pkg_resources, which setuptools 81 removed.
 faster-whisper>=1.0
 setuptools<81
+# review_server.py
+flask>=3.0

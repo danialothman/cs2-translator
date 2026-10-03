@@ -35,6 +35,7 @@ Pipelines:
 | `expect` | `caption`, `suppress`, or `skip_english` (suppress with Skip English on, caption with it off) |
 | `smoke` | In the `smoke` set |
 | `source` | `fleurs`, `synthetic` or `recorded` |
+| `note` | Optional. Where the reference came from when nobody checked it by ear |
 
 - **speech** (32): 4 FLEURS test utterances each in Russian, Portuguese, Polish, Spanish, Turkish, German, Ukrainian and Chinese. FLEURS sentences are parallel across languages, so the English reference is the same sentence from the English split.
 - **english** (10): FLEURS English utterances.
@@ -75,6 +76,20 @@ python -m evals.record_loopback --cli --minutes 60  # terminal
 It records every app's sound, so pause browsers and chat apps first. Your microphone is not included. Loopback delivers nothing while nothing plays, so silent stretches are dropped and timestamps run ahead of the match clock.
 
 Much of the English in a match is the game's own radio voice ("Roger that", "Need help"), not players. Label both: Skip English must drop either.
+
+### Finding and labelling the speech
+
+Player voice sits under game audio, so an offline voice detector finds little of it. A whisper-1 draft finds far more, then you listen and label:
+
+```bash
+python -m evals.draft_transcript evals/clips/private/recordings/<name>.flac --dry-run  # cost
+python -m evals.draft_transcript evals/clips/private/recordings/<name>.flac            # about $0.36 per hour
+python -m evals.review_server                                                         # http://127.0.0.1:5005
+```
+
+The draft (`<name>-api.tsv`) has one row per line whisper-1 heard, with its time and detected language. The review page plays each row's snippet and saves your labels to `<name>-review.json` as you type: player, radio, junk or unsure, plus the language, the words and their English meaning. **Boost quiet clips** normalizes each snippet, and **Add segment** covers speech the draft missed.
+
+Treat the draft as a pointer, not a label. whisper-1 invents text over game audio (a whole run of "five… of… death"), and names the wrong language for short lines: real Chinese came back as Spanish, Swedish and Portuguese. When nobody can check a language by ear, note in the manifest row that the reference comes from the draft.
 
 ## Metrics
 
