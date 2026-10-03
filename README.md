@@ -148,4 +148,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the architecture, threading rules, co
 
 ## License
 
-MIT License — free to use and modify
+MIT License. See [LICENSE](LICENSE).
