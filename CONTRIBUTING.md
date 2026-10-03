@@ -59,7 +59,7 @@ A live run costs money. Start with `--dry-run`. Responses are cached, so a rerun
 
 - The project follows [Semantic Versioning](https://semver.org/). The version lives only in `version.py` and `.release-please-manifest.json`; release-please bumps both. Do not edit them or released `CHANGELOG.md` entries by hand.
 - Every commit on `main` must follow [Conventional Commits](https://www.conventionalcommits.org/), because release-please reads them to pick the version and write the changelog. `feat:` bumps minor, `fix:` and `perf:` bump patch, and `feat!:` or a `BREAKING CHANGE:` footer bumps major. `docs:`, `refactor:`, `test:`, `ci:`, `build:` and `chore:` do not appear in the changelog.
-- Pull requests are merged with a merge commit, so each commit message counts, not the PR title.
+- Pull requests are merged with a merge commit, so the commit messages decide the changelog. Write the PR title in plain English, not as a conventional commit ("Extract voice chat from CS2 demos", not "feat(evals): ..."): the merge commit's body is the PR title, and release-please would count a conventional title as a second commit and list the change twice.
 - Releases: each push to `main` updates a release PR. Merging it tags the version, creates the GitHub release and attaches the Windows build.
 
 ## GitHub Actions
